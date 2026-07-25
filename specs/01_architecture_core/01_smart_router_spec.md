@@ -1,102 +1,79 @@
-# 📜 SPEC: Smart Router & Intent Classifier
-**ID:** SPEC-CORE-01  
-**Épica Relacionada:** Épica 5 (HU 5.1)  
-**Estado:** DRAFT / READY FOR IMPL  
+# 📄 Especificación SDD: Smart Router Dinámico & Resiliencia (Circuit Breaker)
+
+**Especificación ID:** `01_smart_router_spec`  
+**Dominio:** Arquitectura Core Backend  
+**Versión:** `7.0.0`  
+**Estado:** IMPLEMENTADO & AUDITADO  
 
 ---
 
-## 1. Alcance y Requisitos
-El Smart Router es el componente de orquestación encargado de evaluar la intención del usuario y seleccionar el AI Pod especializado o coordinar múltiples AI Pods si la consulta es multidisciplinaria.
+## 1. Visión General del Enrutador Dinámico (Dynamic Plugin-as-a-Service)
+
+El **Smart Router Dinámico (`DynamicSmartRouter`)** es el componente central en Go 1.22+ encargado de recibir las consultas de los clientes y dirigirlas al **AI Pod** adecuado en tiempo sub-milisegundo.
+
+Para evitar la recompilación del motor backend al crear nuevos AI Pods, el sistema soporta **Registro Dinámico en Tiempo de Ejecución (Runtime Pod Registration)** a través del endpoint HTTP `POST /api/v1/pods/register` y el adaptador genérico `HTTPSidecarAdapter`.
 
 ---
 
-## 2. Contrato de Interfaz (Schema)
+## 2. Diagrama de Arquitectura de Enrutamiento y Resiliencia
 
-### 2.1 Router Input Payload
-```json
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "type": "object",
-  "properties": {
-    "user_prompt": { "type": "string", "minLength": 1 },
-    "tenant_id": { "type": "string" },
-    "conversation_history": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "role": { "type": "string", "enum": ["user", "assistant"] },
-          "content": { "type": "string" }
-        }
-      }
-    }
-  },
-  "required": ["user_prompt", "tenant_id"]
-}
+```mermaid
+graph TD
+    Client[Cliente / Frontend / Webhook] -->|POST /api/v1/chat/completions| Router[DynamicSmartRouter en Go]
+    
+    Router -->|Paso 1: Check Pods Dinámicos| DynamicTable[(Registry Dinámico en DB/RAM)]
+    Router -->|Paso 2: Check Pods Nativos| StaticTable[Pods Nativos: AFIP, GitHub DevOps]
+
+    DynamicTable -->|Paso 3: Pasar por Circuit Breaker| CB[CircuitBreaker Pattern]
+    CB -->|CLOSED / Normal| Adapter[HTTPSidecarAdapter]
+    CB -->|OPEN / Degradado| Fallback[Respuesta de Resiliencia / Caché Redis]
+
+    Adapter -->|HTTP POST| ExternalPod[Microservicio AI Pod del Cliente]
 ```
 
-### 2.2 Router Decision Output Payload
+---
+
+## 3. Registro Dinámico sin Recompilación (`POST /api/v1/pods/register`)
+
+Cualquier nuevo AI Pod creado por un cliente se registra dinámicamente mediante el contrato JSON:
+
 ```json
 {
-  "type": "object",
-  "properties": {
-    "is_multi_domain": { "type": "boolean" },
-    "target_pods": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": ["AFIP_FINANCE", "EVOCRM_HELPDESK", "SOCIAL_MARKETING", "SCM_LOGISTICS"]
-      }
-    },
-    "sub_queries": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "pod": { "type": "string" },
-          "extracted_query": { "type": "string" }
-        }
-      }
-    },
-    "confidence_score": { "type": "number", "minimum": 0.0, "maximum": 1.0 }
-  },
-  "required": ["is_multi_domain", "target_pods", "confidence_score"]
+  "pod_id": "POD_CUSTOM_LOGISTICS_SERVICE",
+  "name": "AI Pod Logística y Despachos Personalizado",
+  "tenant_id": "tenant_logistics_corp",
+  "endpoint_url": "http://pod-logistics-service:8089/process",
+  "keywords": ["despacho", "seguimiento", "camion"],
+  "status": "ACTIVE"
 }
 ```
 
 ---
 
-## 3. Escenarios de Comportamiento (BDD - Given / When / Then)
+## 4. Mecanismo Resiliente: Cortacircuitos (Circuit Breaker)
 
-### Escenario 1: Enrutamiento directo a Pod AFIP
-```gherkin
-Given un mensaje de usuario: "¿Cómo genero el archivo CSR para AFIP en Ubuntu?"
-And un tenant_id válido "tenant_1001"
-When el Smart Router procesa la intención del mensaje
-Then el campo is_multi_domain debe ser false
-And el arreglo target_pods debe contener exactamente ["AFIP_FINANCE"]
-And confidence_score debe ser >= 0.90
-```
+Para prevenir fallos en cascada cuando el microservicio de un AI Pod dinámico falla o no responde:
 
-### Escenario 2: Enrutamiento a Pod SCM (Landed Costs)
-```gherkin
-Given un mensaje de usuario: "Necesito prorratear el costo de flete internacional en una recepción de compras"
-When el Smart Router procesa la intención del mensaje
-Then el arreglo target_pods debe contener ["SCM_LOGISTICS"]
-And el sub_queries extraído debe centrarse en "Landed Costs y prorrateo de compras"
-```
-
-### Escenario 3: Enrutamiento Multidominio (Compra + Factura AFIP)
-```gherkin
-Given un mensaje de usuario: "Tengo un problema al crear la orden de compra en WMS y cuando intento facturarla me tira error de CUIT en AFIP"
-When el Smart Router procesa la intención del mensaje
-Then el campo is_multi_domain debe ser true
-And target_pods debe contener ["SCM_LOGISTICS", "AFIP_FINANCE"]
-And sub_queries debe contener 2 elementos mapeando las dudas específicas a cada Pod
-```
+1. **Estado `CLOSED` (Normal):** Todas las peticiones fluyen hacia el microservicio del Pod.
+2. **Estado `OPEN` (Tripped):** Si se acumulan 2 fallos consecutivos o timeouts ($>5\text{s}$), el cortacircuitos se abre por 10 segundos, rechazando peticiones directas y activando la **Respuesta de Degradación Grácil (Graceful Fallback)**.
+3. **Estado `HALF_OPEN` (Recuperación):** Al expirar el tiempo de espera, se permite 1 petición de prueba para verificar si el microservicio se ha recuperado.
 
 ---
 
-## 4. Invariantes & Aserciones de Rendimiento
-* **Latencia del Router:** $\le 350\text{ms}$ utilizando modelos rápidos (`Claude 3 Haiku` o `GPT-4o-mini`).
-* **Fallback Rule:** Si `confidence_score < 0.60`, derivar a `AFIP_FINANCE` por defecto con una pregunta aclaratoria al usuario.
+## 5. Criterios de Aceptación BDD (`Godog`)
+
+```gherkin
+Característica: Registro Dinámico de AI Pods y Cortacircuitos de Resiliencia
+
+  Escenario: Registrar un AI Pod dinámico sin recompilar el Core Engine
+    Dado que el servidor Go está en ejecución en puerto 8080
+    Cuando se envía una petición POST a "/api/v1/pods/register" con el Pod "POD_CUSTOM_LOGISTICS"
+    Entonces el estado de la respuesta debe ser 200 OK
+    Y el Smart Router debe enrutar consultas de "despacho" hacia el nuevo Pod dinámico inmediatamente
+
+  Escenario: Activación del Cortacircuitos ante fallo de un microservicio externo
+    Dado que el AI Pod "POD_CUSTOM_LOGISTICS" presenta fallos consecutivos de red
+    Cuando el cortacircuitos detecta 2 fallos continuos
+    Entonces el estado cambia a "OPEN"
+    Y las siguientes consultas devuelven una respuesta de resiliencia grácil sin romper el servidor
+```
