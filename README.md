@@ -4,11 +4,12 @@ Este repositorio contiene la documentación oficial, las especificaciones ejecut
 
 ## 📄 Estructura de Documentación y Módulos del Workspace
 
-* **[`VERSION`](file:///home/martin/server/onlyone%20ai%20pods/VERSION):** Versión actual de la plataforma (`5.3.0`).
+* **[`VERSION`](file:///home/martin/server/onlyone%20ai%20pods/VERSION):** Versión actual de la plataforma (`5.4.0`).
 * **[`LICENSE`](file:///home/martin/server/onlyone%20ai%20pods/LICENSE):** Licencia Propietaria del Autor (Martin Llanos).
+* **[`.aipods/rules/mcp_codebase_memory.md`](file:///home/martin/server/onlyone%20ai%20pods/.aipods/rules/mcp_codebase_memory.md):** Regla de uso prioritario del MCP `codebase-memory-mcp`.
 * **[`.aipods/skills/sdd-spec-writer/SKILL.md`](file:///home/martin/server/onlyone%20ai%20pods/.aipods/skills/sdd-spec-writer/SKILL.md):** Agentic Skill para redacción de especificaciones SDD y BDD.
 * **[`docs/BACKLOG.md`](file:///home/martin/server/onlyone%20ai%20pods/docs/BACKLOG.md):** Backlog del producto con 12 Épicas e Historias de Usuario consolidadas.
-* **[`docs/SDD.md`](file:///home/martin/server/onlyone%20ai%20pods/docs/SDD.md):** Documento Maestro de Diseño de Software (SDD v5.3.0) incorporando "Servicio como Software", Ecosistema Multi-Repo, Autoconsumo CRM/Billing, Onboarding y Catálogo de 6 AI Pods.
+* **[`docs/SDD.md`](file:///home/martin/server/onlyone%20ai%20pods/docs/SDD.md):** Documento Maestro de Diseño de Software (SDD v5.3.0).
 * **[`docs/DEVELOPMENT_ONBOARDING_CHECKLIST.md`](file:///home/martin/server/onlyone%20ai%20pods/docs/DEVELOPMENT_ONBOARDING_CHECKLIST.md):** Guía Completa de Onboarding para Desarrolladores y Rutas del Workspace (`/home/martin/server/`).
 * **[`specs/`](file:///home/martin/server/onlyone%20ai%20pods/specs/README.md):** Suite Completa de 24 Especificaciones SDD organizada en **4 Dominios Temáticos** (`01_architecture_core/`, `02_security_and_compliance/`, `03_plugin_and_skills/`, `04_customer_portal_growth/`, `pods/` y `api/`).
 

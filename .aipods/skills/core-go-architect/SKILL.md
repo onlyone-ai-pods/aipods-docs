@@ -7,10 +7,13 @@ description: Guía experta de arquitectura en Go 1.22+ para el motor backend de 
 
 Esta habilidad instruye a asistentes de IA para desarrollar el backend del proyecto `aipods-core-engine` en **Golang 1.22+**:
 
+## Uso Mandatorio de MCP (`codebase-memory-mcp`)
+Si el servidor MCP `codebase-memory-mcp` está disponible, utilizar preferentemente `search_graph`, `trace_path` y `get_code_snippet` antes de hacer búsquedas manuales con grep/glob para descubrir funciones, handlers o paquetes en Go.
+
 ## Reglas de Codificación en Go
 
 1. **Rendimiento y Latencia Sub-Milisegundo:**
-   - Escribir código idioomático en Go 1.22+ sin sobre-ingeniería ni dependencias frágiles.
+   - Escribir código idiomático en Go 1.22+ sin sobre-ingeniería ni dependencias frágiles.
    - Utilizar Gin Web Framework para endpoints REST HTTP.
 
 2. **Manejo Estricto de Errores:**
