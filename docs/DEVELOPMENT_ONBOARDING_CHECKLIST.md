@@ -8,11 +8,11 @@
 
 ## 🏛️ 1. Arquitectura Multi-Repositorio & Rutas del Workspace
 
-El proyecto se compone de 4 repositorios segregados dentro de la Organización **`onlyone-ai-pods`**. Para el desarrollo local y entornos de pares de IA (Antigravity), las rutas absolutas de cada módulo se distribuyen así:
+El proyecto se compone de 4 repositorios segregados dentro de la Organización **`onlyone-ai-pods`**. Para el desarrollo local y entornos de pares de IA (Antigravity), las rutas absolutas de cada módulo en el servidor son exactamente idénticas a los nombres de los repositorios remotos:
 
 ```text
 /home/martin/server/
-├── onlyone ai pods/               [aipods-docs] Specs SDD, Backlog, SDD.md, OpenAPI yaml
+├── aipods-docs/                   [aipods-docs] Specs SDD, Backlog, SDD.md, OpenAPI yaml
 ├── aipods-core-engine/            [aipods-core-engine] Go 1.22 API Server, Smart Router, RAG, DBs
 ├── aipods-frontend-customer/      [aipods-frontend-customer] React 18 / Vite Portal Público & Sandbox
 └── aipods-frontend-admin/         [aipods-frontend-admin] React 18 / Vite Portal Interno & Senior Review Hub
@@ -28,8 +28,8 @@ Cualquier desarrollador interno del equipo ejecuta los siguientes pasos para obt
 # 1. Crear el directorio servidor local en su máquina
 mkdir -p ~/server && cd ~/server
 
-# 2. Clonar los 4 repositorios con GitHub CLI (gh)
-gh repo clone onlyone-ai-pods/aipods-docs "onlyone ai pods"
+# 2. Clonar los 4 repositorios de la organización con GitHub CLI (gh)
+gh repo clone onlyone-ai-pods/aipods-docs
 gh repo clone onlyone-ai-pods/aipods-core-engine
 gh repo clone onlyone-ai-pods/aipods-frontend-customer
 gh repo clone onlyone-ai-pods/aipods-frontend-admin
