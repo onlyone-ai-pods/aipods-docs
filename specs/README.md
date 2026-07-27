@@ -2,11 +2,11 @@
 
 **Proyecto:** AI Pods Enterprise SaaS Platform  
 **Organización GitHub:** `https://github.com/onlyone-ai-pods/aipods-docs`  
-**Versión:** `19.0.0`  
+**Versión:** `20.0.0`  
 
 ---
 
-## 🏛️ Suite Completa de 30 Especificaciones Organizada por Dominios
+## 🏛️ Suite Completa de 31 Especificaciones Organizada por Dominios
 
 ### Dominio 1: Arquitectura Core & Engine (`specs/01_architecture_core/`)
 * **[`01_smart_router_spec.md`](file:///home/martin/server/aipods-docs/specs/01_architecture_core/01_smart_router_spec.md):** DynamicSmartRouter Go v7.1.0, HTTPSidecarAdapter, CircuitBreaker Pattern.
@@ -15,6 +15,7 @@
 * **[`04_semantic_cache_spec.md`](file:///home/martin/server/aipods-docs/specs/01_architecture_core/04_semantic_cache_spec.md):** Caché Semántico Redis Active-Active, latencia sub-10ms.
 * **[`05_multimodal_and_multisource_rag_ingestion_spec.md`](file:///home/martin/server/aipods-docs/specs/01_architecture_core/05_multimodal_and_multisource_rag_ingestion_spec.md):** Ingesta Multimodal (Markdown `.md`, reST `.rst`, Audio `.mp3`, Video `.mp4`, Google Drive) vía AI Pods Especializados.
 * **[`06_essential_core_pods_vs_dynamic_domain_pods_spec.md`](file:///home/martin/server/aipods-docs/specs/01_architecture_core/06_essential_core_pods_vs_dynamic_domain_pods_spec.md):** AI Pods Esenciales (Core Compilados: Facturación Odoo, Seguridad/Logs, AFIP) vs. AI Pods de Dominio del Cliente (Dinámicos: SAP, SCM, DevOps).
+* **[`07_ai_pods_ecosystem_and_cli_architecture_spec.md`](file:///home/martin/server/aipods-docs/specs/01_architecture_core/07_ai_pods_ecosystem_and_cli_architecture_spec.md):** **[NUEVO v20.0.0]** Arquitectura del Ecosistema AI Pods en 3 modalidades (Core Static, Dynamic Sidecar, Sandbox Efímero), herramienta CLI `aipods-cli` (Scaffold, Hot-Registration, Audit) y matriz de patrones de diseño internacional (Ports & Adapters, Sidecar, CircuitBreaker, Human-in-the-Loop).
 
 ### Dominio 2: Seguridad, Cumplimiento & Gobernanza (`specs/02_security_and_compliance/`)
 * **`07_enterprise_architecture_parameters_spec.md`:** Parámetros de arquitectura enterprise y Auth RS256.
@@ -27,7 +28,7 @@
 * **`24_github_issues_and_feature_request_governance_spec.md`:** Gobernanza de GitHub Issues para Nuevas Características, templates BDD, ciclo de vida en 4 etapas y comandos `gh issue`.
 * **`25_governance_issues_roadmap_spec.md`:** Registro Oficial de los 9 GitHub Issues de Gobernanza (#1 al #9) creados en el repositorio `onlyone-ai-pods/aipods-docs`.
 * **`26_cicd_github_actions_and_helm_chart_spec.md`:** Pipeline CI/CD Automático en GitHub Actions, imágenes Docker en GHCR, Helm Chart (`aipods-platform`), Rolling Updates Zero-Downtime y Rollback automático.
-* **[`27_iso9001_soc2_dossier_generator_spec.md`](file:///home/martin/server/aipods-docs/specs/02_security_and_compliance/27_iso9001_soc2_dossier_generator_spec.md):** **[NUEVO v19.0.0]** Compilador del Dossier Normativo ISO 9001 & SOC 2 Type II (`aipods-cli audit dossier`), arquitectura de alcance dual (Global `--scope=global` vs Por Tenant `--scope=tenant`), firma digital OpenSSL SHA-256 y habilitador comercial para ventas Enterprise.
+* **`27_iso9001_soc2_dossier_generator_spec.md`:** Compilador del Dossier Normativo ISO 9001 & SOC 2 Type II (`aipods-cli audit dossier`), arquitectura de alcance dual (Global `--scope=global` vs Por Tenant `--scope=tenant`), firma digital OpenSSL SHA-256 y habilitador comercial para ventas Enterprise.
 
 ### Dominio 3: Plugins, Skills & Testing (`specs/03_plugin_and_skills/`)
 * **`05_plugin_architecture_spec.md`:** Arquitectura de Plugins WASM y Pod-as-a-Service.
