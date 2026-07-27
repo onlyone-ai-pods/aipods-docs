@@ -2,11 +2,11 @@
 
 **Proyecto:** AI Pods Enterprise SaaS Platform  
 **Organización GitHub:** `https://github.com/onlyone-ai-pods/aipods-docs`  
-**Versión:** `15.0.0`  
+**Versión:** `17.0.0`  
 
 ---
 
-## 🏛️ Suite Completa de 28 Especificaciones Organizada por Dominios
+## 🏛️ Suite Completa de 29 Especificaciones Organizada por Dominios
 
 ### Dominio 1: Arquitectura Core & Engine (`specs/01_architecture_core/`)
 * **[`01_smart_router_spec.md`](file:///home/martin/server/aipods-docs/specs/01_architecture_core/01_smart_router_spec.md):** DynamicSmartRouter Go v7.1.0, HTTPSidecarAdapter, CircuitBreaker Pattern.
@@ -25,7 +25,8 @@
 * **`19_github_cli_and_spec_pr_governance_spec.md`:** Gobernanza de PRs, `gh` CLI y convención de ramas.
 * **`23_document_security_and_anti_poisoning_spec.md`:** Inspección de seguridad de archivos, bytes mágicos `%PDF-` y filtro anti-poisoning RAG.
 * **`24_github_issues_and_feature_request_governance_spec.md`:** Gobernanza de GitHub Issues para Nuevas Características, templates BDD, ciclo de vida en 4 etapas y comandos `gh issue`.
-* **[`25_governance_issues_roadmap_spec.md`](file:///home/martin/server/aipods-docs/specs/02_security_and_compliance/25_governance_issues_roadmap_spec.md):** **[NUEVO v15.0.0]** Registro Oficial de los 9 GitHub Issues de Gobernanza (#1 al #9) creados en el repositorio `onlyone-ai-pods/aipods-docs`.
+* **`25_governance_issues_roadmap_spec.md`:** Registro Oficial de los 9 GitHub Issues de Gobernanza (#1 al #9) creados en el repositorio `onlyone-ai-pods/aipods-docs`.
+* **[`26_cicd_github_actions_and_helm_chart_spec.md`](file:///home/martin/server/aipods-docs/specs/02_security_and_compliance/26_cicd_github_actions_and_helm_chart_spec.md):** **[NUEVO v17.0.0]** Pipeline CI/CD Automático en GitHub Actions, imágenes Docker en GHCR, Helm Chart (`aipods-platform`), Rolling Updates Zero-Downtime y Rollback automático de 1 segundo.
 
 ### Dominio 3: Plugins, Skills & Testing (`specs/03_plugin_and_skills/`)
 * **`05_plugin_architecture_spec.md`:** Arquitectura de Plugins WASM y Pod-as-a-Service.
