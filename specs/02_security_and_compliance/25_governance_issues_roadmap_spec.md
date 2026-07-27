@@ -21,7 +21,7 @@ A continuación se detalla el listado de los 9 GitHub Issues registrados en el r
 | **`#6`** | `[FEAT] POD_SOCIAL_MARKETING: Generación de Contenido & Meta Graph API` | `feature`, `needs-spec`, `pod-dynamic` | `OPEN` | [Issue #6](https://github.com/onlyone-ai-pods/aipods-docs/issues/6) |
 | **`#7`** | `[FEAT] Exportación de Reportes PDF/CSV de Auditoría en Admin Review Hub` | `feature`, `needs-spec`, `frontend-admin` | `OPEN` | [Issue #7](https://github.com/onlyone-ai-pods/aipods-docs/issues/7) |
 | **`#8`** | `[FEAT] Integración JSON-RPC Odoo Billing: Confirmación de Pagos y Aprovisionamiento PROD_ACTIVE` | `feature`, `needs-spec`, `frontend-customer` | `OPEN` | [Issue #8](https://github.com/onlyone-ai-pods/aipods-docs/issues/8) |
-| **`#9`** | `[FEAT] Generación Automática del Dossier ISO 9001 & SOC 2 Type II` | `feature`, `needs-spec` | `OPEN` | [Issue #9](https://github.com/onlyone-ai-pods/aipods-docs/issues/9) |
+| **`#9`** | `[FEAT] Generación Automática del Dossier ISO 9001 & SOC 2 Type II (Global & Per-Tenant)` | `feature`, `needs-spec` | `OPEN` | [Issue #9](https://github.com/onlyone-ai-pods/aipods-docs/issues/9) |
 
 ---
 
