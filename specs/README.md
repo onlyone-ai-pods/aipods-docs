@@ -2,7 +2,7 @@
 
 **Proyecto:** AI Pods Enterprise SaaS Platform  
 **Organización GitHub:** `https://github.com/onlyone-ai-pods/aipods-docs`  
-**Versión:** `21.0.0`  
+**Versión:** `22.0.0`  
 
 ---
 
@@ -15,9 +15,9 @@
 * **[`04_semantic_cache_spec.md`](file:///home/martin/server/aipods-docs/specs/01_architecture_core/04_semantic_cache_spec.md):** Caché Semántico Redis Active-Active, latencia sub-10ms.
 * **[`05_multimodal_and_multisource_rag_ingestion_spec.md`](file:///home/martin/server/aipods-docs/specs/01_architecture_core/05_multimodal_and_multisource_rag_ingestion_spec.md):** Ingesta Multimodal (Markdown `.md`, reST `.rst`, Audio `.mp3`, Video `.mp4`, Google Drive) vía AI Pods Especializados.
 * **[`06_essential_core_pods_vs_dynamic_domain_pods_spec.md`](file:///home/martin/server/aipods-docs/specs/01_architecture_core/06_essential_core_pods_vs_dynamic_domain_pods_spec.md):** AI Pods Esenciales (Core Compilados: Facturación Odoo, Seguridad/Logs, AFIP) vs. AI Pods de Dominio del Cliente (Dinámicos: SAP, SCM, DevOps).
-* **[`07_ai_pods_ecosystem_and_cli_architecture_spec.md`](file:///home/martin/server/aipods-docs/specs/01_architecture_core/07_ai_pods_ecosystem_and_cli_architecture_spec.md):** Arquitectura del Ecosistema AI Pods en 3 modalidades (Core Static, Dynamic Sidecar, Sandbox Efímero), herramienta CLI `aipods-cli` (Scaffold, Hot-Registration, Audit) y matriz de patrones de diseño internacional.
-* **[`08_tenant_secrets_vault_and_byov_bitwarden_spec.md`](file:///home/martin/server/aipods-docs/specs/01_architecture_core/08_tenant_secrets_vault_and_byov_bitwarden_spec.md):** **[NUEVO v21.0.0]** Modelo Híbrido de Gestión de Secretos del Tenant (BYOV Bitwarden Secrets Manager con lectura efímera en RAM volátil vs. Platform Native Vault cifrado AES-256 GCM).
-* **[`09_micro_ai_pods_swarm_orchestration_spec.md`](file:///home/martin/server/aipods-docs/specs/01_architecture_core/09_micro_ai_pods_swarm_orchestration_spec.md):** **[NUEVO v21.0.0]** Motor de Orquestación de Enjambre de Micro AI Pods (Swarm Protocol), composición modular "Lego", ejecución en paralelo via NATS y respuesta ejecutiva integrada.
+* **[`07_ai_pods_ecosystem_and_cli_architecture_spec.md`](file:///home/martin/server/aipods-docs/specs/01_architecture_core/07_ai_pods_ecosystem_and_cli_architecture_spec.md):** **[ACTUALIZADO v22.0.0]** Arquitectura del Ecosistema AI Pods en 3 modalidades (Core Static, Dynamic Sidecar, Sandbox Efímero), herramienta CLI `aipods-cli` (Scaffold, Validate Pipeline con 4 filtros, Hot-Registration, Audit) y matriz de patrones de diseño internacional.
+* **[`08_tenant_secrets_vault_and_byov_bitwarden_spec.md`](file:///home/martin/server/aipods-docs/specs/01_architecture_core/08_tenant_secrets_vault_and_byov_bitwarden_spec.md):** Modelo Híbrido de Gestión de Secretos del Tenant (BYOV Bitwarden Secrets Manager con lectura efímera en RAM volátil vs. Platform Native Vault cifrado AES-256 GCM).
+* **[`09_micro_ai_pods_swarm_orchestration_spec.md`](file:///home/martin/server/aipods-docs/specs/01_architecture_core/09_micro_ai_pods_swarm_orchestration_spec.md):** Motor de Orquestación de Enjambre de Micro AI Pods (Swarm Protocol), composición modular "Lego", ejecución en paralelo via NATS y respuesta ejecutiva integrada.
 
 ### Dominio 2: Seguridad, Cumplimiento & Gobernanza (`specs/02_security_and_compliance/`)
 * **`07_enterprise_architecture_parameters_spec.md`:** Parámetros de arquitectura enterprise y Auth RS256.

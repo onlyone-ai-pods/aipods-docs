@@ -1,7 +1,8 @@
-# 📜 SPEC: Arquitectura del Ecosistema AI Pods, Herramienta CLI (`aipods-cli`) y Patrones de Integración
+# 📜 SPEC: Arquitectura del Ecosistema AI Pods, Herramienta CLI (`aipods-cli`) y Pipeline de Validación
 
 **ID:** SPEC-CORE-28  
 **Épica Relacionada:** Arquitectura de Plataforma, Ecosystem Tooling & AI Pod Standards  
+**Issue Relacionado:** `#10` ([`[FEAT] Herramienta CLI Unificada aipods-cli (Scaffold, Register & Audit)`](https://github.com/onlyone-ai-pods/aipods-docs/issues/10))  
 **Estado:** PROPOSED / SPEC-DRIVEN  
 
 ---
@@ -36,13 +37,54 @@ graph TD
 
 ---
 
-## 3. Rol y Arquitectura de `aipods-cli` (Developer & Operator Tooling)
+## 3. Pipeline de Validación del Cliente (`aipods-cli validate`)
 
-El CLI **`aipods-cli`** es la herramienta oficial de línea de comandos para desarrolladores, operadores y auditores:
+Cuando un cliente o desarrollador ejecuta `aipods-cli validate --path=./my_pod --strict`, la herramienta ejecuta **4 Filtros de Validación Rigurosos**:
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Dev as 👨‍💻 Cliente / Desarrollador
+    participant CLI as 🛠️ aipods-cli validate
+    participant SpecEngine as 📜 1. Validador de Esqueletos (pod.json / workflow.yml)
+    participant Linter as 🔍 2. Auditoría Anti-Poisoning (FileSanitizer / gosec)
+    participant Runner as 🧪 3. Pruebas BDD (Contrato PodResponse <15ms)
+    participant DryRun as 🛡️ 4. Verificación Human-in-the-Loop (ApprovalToken)
+
+    Dev->>CLI: aipods-cli validate --path=./my_custom_pod --strict
+    
+    Note over CLI, SpecEngine: Filtro 1: Estructura y Sintaxis
+    CLI->>SpecEngine: Valida esquemas JSON de pod.json y sintaxis de workflow.yml
+    SpecEngine-->>CLI: ✅ Sintaxis y esquemas válidos
+
+    Note over CLI, Linter: Filtro 2: Seguridad de Código
+    CLI->>Linter: Verifica FileSanitizer Magic Bytes + AST gosec (0 vulnerabilidades)
+    Linter-->>CLI: ✅ Código limpio y seguro
+
+    Note over CLI, Runner: Filtro 3: Contrato BDD & Latencia
+    CLI->>Runner: Ejecuta llamadas a /healthz y /process (Verifica latencia <15ms)
+    Runner-->>CLI: ✅ Contrato cumplido
+
+    Note over CLI, DryRun: Filtro 4: Protocolo Dry-Run
+    CLI->>DryRun: Invoca petición con dry_run = true
+    DryRun-->>CLI: ✅ Retorna ApprovalToken inmutable
+
+    CLI-->>Dev: 🟢 "SUCCESS: Pod verificado y listo para aipods-cli register"
+```
+
+### Detalle de los 4 Filtros de Validación:
+1. **Filtro 1 (Sintaxis y Esquema):** Valida la presencia de `pod.json` y la coherencia del esquema de macros `workflow.yml`.
+2. **Filtro 2 (Seguridad & Anti-Poisoning):** Ejecuta `gosec` (0 vulnerabilidades) y confirma que los entrypoints invoquen `FileSanitizer.ValidatePDFMagicBytes()`.
+3. **Filtro 3 (Contrato BDD & Latencia <15ms):** Realiza pings a `/healthz` y valida que `/process` responda exactamente con la estructura `PodResponse` en menos de 15ms.
+4. **Filtro 4 (Human-in-the-Loop):** Ejecuta la llamada simulada con `dry_run = true` asegurando la presencia del token `ApprovalToken`.
+
+---
+
+## 4. Rol y Módulos Funcionales de `aipods-cli`
 
 ### Módulo 1: Desarrollo y Scaffold (`aipods-cli pod ...`)
-* **`aipods-cli pod init --name=POD_CUSTOM`**: Genera la estructura de código base estandarizada cumpliendo la interfaz `pod.BaseAIPod`, esquemas JSON de entrada/salida y suite de pruebas BDD `pod_test.go`.
-* **`aipods-cli pod test --pod=POD_CUSTOM`**: Ejecuta la validación BDD en entorno local.
+* **`aipods-cli pod init --name=POD_CUSTOM`**: Genera el proyecto estandarizado cumpliendo la interfaz `pod.BaseAIPod`, esquemas JSON de entrada/salida y suite de pruebas BDD `pod_test.go`.
+* **`aipods-cli pod validate --path=./POD_CUSTOM`**: Ejecuta los 4 filtros de validación del flujo del cliente.
 
 ### Módulo 2: Registro Operacional en Caliente (`aipods-cli register ...`)
 * **`aipods-cli register --id=POD_CUSTOM --endpoint=http://sidecar:9095 --keywords=kw1,kw2`**: Invoca el endpoint `/api/v1/pods/register` registrando el Pod dinámico en el `DynamicSmartRouter` en caliente sin reiniciar el motor Go.
@@ -53,7 +95,7 @@ El CLI **`aipods-cli`** es la herramienta oficial de línea de comandos para des
 
 ---
 
-## 4. Matriz de Patrones de Diseño Cumplidos
+## 5. Matriz de Patrones de Diseño Cumplidos
 
 1. **Ports & Adapters (Hexagonal Architecture):** Interfaz agnóstica `pod.BaseAIPod` desacoplada del medio de transporte.
 2. **Dynamic Sidecar Pattern:** Registro de microservicios dinámicos en tiempo de ejecución.
@@ -63,7 +105,7 @@ El CLI **`aipods-cli`** es la herramienta oficial de línea de comandos para des
 
 ---
 
-## 5. Criterios de Aceptación (Gherkin BDD)
+## 6. Criterios de Aceptación (Gherkin BDD)
 
 ```gherkin
 Feature: Arquitectura del Ecosistema AI Pods y Herramienta aipods-cli
@@ -73,6 +115,12 @@ Feature: Arquitectura del Ecosistema AI Pods y Herramienta aipods-cli
     When el comando genera la estructura de carpetas
     Then debe crear la implementación cumpliendo la interfaz `pod.BaseAIPod`
     And incluir el archivo de pruebas BDD `pod_test.go` listo para ejecución
+
+  Scenario: Validación Rigurosa del Flujo de Trabajo del Cliente (Validate Pipeline Path)
+    Given un desarrollador ejecutando `aipods-cli validate --path=./my_custom_pod --strict`
+    When la herramienta evalúa los 4 filtros (Esquemas, Seguridad, Contrato BDD <15ms y Dry-Run)
+    Then debe validar la presencia de `FileSanitizer` y 0 vulnerabilidades `gosec`
+    And confirmar el retorno de `ApprovalToken` en modo simulación
 
   Scenario: Registro de un Pod Dinámico en Caliente (Hot-Registration Path)
     Given un microservicio sidecar ejecutándose en `http://localhost:9095`
@@ -85,10 +133,4 @@ Feature: Arquitectura del Ecosistema AI Pods y Herramienta aipods-cli
     When el número de fallas supera el umbral configurado (ej: 3 fallas)
     Then el `CircuitBreaker` debe cambiar su estado a `OPEN`
     And retornar un mensaje de fallback amigable sin bloquear las peticiones de otros tenants
-
-  Scenario: Simulación Dry-Run (`dry_run = true`)
-    Given una consulta enviada a cualquier AI Pod del ecosistema con `dry_run = true`
-    When el Pod procesa la solicitud
-    Then debe retornar `IsDryRun: true` y `ActionName: "<nombre_accion>"`
-    And generar un `ApprovalToken` inmutable sin aplicar mutaciones persistentes
 ```
