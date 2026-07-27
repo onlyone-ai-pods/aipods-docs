@@ -9,7 +9,7 @@
 
 ## 1. Registro Oficial de Issues Creados en GitHub
 
-A continuación se detalla el listado de los 9 GitHub Issues registrados en el repositorio central `onlyone-ai-pods/aipods-docs`:
+A continuación se detalla el listado de los 12 GitHub Issues registrados en el repositorio central `onlyone-ai-pods/aipods-docs`:
 
 | ID Issue | Título de la Característica | Etiquetas (Labels) | Estado | URL GitHub |
 | :---: | :--- | :--- | :---: | :--- |
@@ -22,12 +22,15 @@ A continuación se detalla el listado de los 9 GitHub Issues registrados en el r
 | **`#7`** | `[FEAT] Exportación de Reportes PDF/CSV de Auditoría en Admin Review Hub` | `feature`, `needs-spec`, `frontend-admin` | `OPEN` | [Issue #7](https://github.com/onlyone-ai-pods/aipods-docs/issues/7) |
 | **`#8`** | `[FEAT] Integración JSON-RPC Odoo Billing: Confirmación de Pagos y Aprovisionamiento PROD_ACTIVE` | `feature`, `needs-spec`, `frontend-customer` | `OPEN` | [Issue #8](https://github.com/onlyone-ai-pods/aipods-docs/issues/8) |
 | **`#9`** | `[FEAT] Generación Automática del Dossier ISO 9001 & SOC 2 Type II (Global & Per-Tenant)` | `feature`, `needs-spec` | `OPEN` | [Issue #9](https://github.com/onlyone-ai-pods/aipods-docs/issues/9) |
+| **`#10`** | `[FEAT] Herramienta CLI Unificada aipods-cli (Scaffold, Register & Audit)` | `feature`, `spec-approved`, `pod-core` | `OPEN` | [Issue #10](https://github.com/onlyone-ai-pods/aipods-docs/issues/10) |
+| **`#11`** | `[FEAT] Módulo Híbrido de Gestión de Secretos (BYOV Bitwarden Secrets Manager & Native Vault)` | `feature`, `needs-spec`, `pod-core` | `OPEN` | [Issue #11](https://github.com/onlyone-ai-pods/aipods-docs/issues/11) |
+| **`#12`** | `[FEAT] Motor de Orquestación de Enjambre de Micro AI Pods (Swarm Protocol)` | `feature`, `needs-spec`, `pod-core` | `OPEN` | [Issue #12](https://github.com/onlyone-ai-pods/aipods-docs/issues/12) |
 
 ---
 
 ## 2. Instrucciones para la Resolución de Issues (Workflow SDD)
 
-Para abordar cualquiera de los Issues `#1` al `#9`:
+Para abordar cualquiera de los Issues `#1` al `#12`:
 
 1. Crear rama `spec/issue-<ID>-<descripcion>` en `aipods-docs`.
 2. Redactar o actualizar la especificación `.spec.md` en `specs/`.
