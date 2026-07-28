@@ -9,7 +9,7 @@
 
 ## 1. Registro Oficial de Issues Creados en GitHub
 
-A continuación se detalla el listado de los 12 GitHub Issues registrados en el repositorio central `onlyone-ai-pods/aipods-docs`:
+A continuación se detalla el listado de los 13 GitHub Issues registrados en el repositorio central `onlyone-ai-pods/aipods-docs`:
 
 | ID Issue | Título de la Característica | Etiquetas (Labels) | Estado | URL GitHub |
 | :---: | :--- | :--- | :---: | :--- |
@@ -25,12 +25,13 @@ A continuación se detalla el listado de los 12 GitHub Issues registrados en el 
 | **`#10`** | `[FEAT] Herramienta CLI Unificada aipods-cli (Scaffold, Validate, Register & Audit)` | `feature`, `spec-approved`, `pod-core` | `OPEN` | [Issue #10](https://github.com/onlyone-ai-pods/aipods-docs/issues/10) |
 | **`#11`** | `[FEAT] Módulo Híbrido de Gestión de Secretos (BYOV Bitwarden Secrets Manager & Native Vault)` | `feature`, `needs-spec`, `pod-core` | `OPEN` | [Issue #11](https://github.com/onlyone-ai-pods/aipods-docs/issues/11) |
 | **`#12`** | `[FEAT] Motor de Orquestación de Enjambre de Micro AI Pods (Swarm Protocol)` | `feature`, `needs-spec`, `pod-core` | `OPEN` | [Issue #12](https://github.com/onlyone-ai-pods/aipods-docs/issues/12) |
+| **`#13`** | `[FEAT] Motor de Resiliencia Enterprise (2FA OTP Interruption, NATS JobId, Saga Pattern & Policy Rulesets)` | `feature`, `needs-spec`, `pod-core` | `OPEN` | [Issue #13](https://github.com/onlyone-ai-pods/aipods-docs/issues/13) |
 
 ---
 
 ## 2. Instrucciones para la Resolución de Issues (Workflow SDD)
 
-Para abordar cualquiera de los Issues `#1` al `#12`:
+Para abordar cualquiera de los Issues `#1` al `#13`:
 
 1. Crear rama `spec/issue-<ID>-<descripcion>` en `aipods-docs`.
 2. Redactar o actualizar la especificación `.spec.md` en `specs/`.
