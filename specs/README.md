@@ -2,7 +2,9 @@
 
 **Proyecto:** AI Pods Enterprise SaaS Platform  
 **Organización GitHub:** `https://github.com/onlyone-ai-pods/aipods-docs`  
-**Versión:** `23.0.0`  
+**Versión:** `25.0.0`  
+**Guía de Onboarding & PRs:** [`DEVELOPER_ONBOARDING_AND_GIT_WORKFLOW.md`](file:///home/martin/server/aipods-docs/DEVELOPER_ONBOARDING_AND_GIT_WORKFLOW.md)  
+**Scripts Locales:** [`scripts/`](file:///home/martin/server/aipods-docs/scripts/) (`deploy_stack.sh`, `start_local_stack.sh`, `test_functional_e2e.sh`, `stop_local_stack.sh`)  
 
 ---
 
