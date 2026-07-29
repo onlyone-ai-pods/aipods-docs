@@ -1,3 +1,7 @@
+<p align="center">
+  <img src=".github/assets/aipods_banner_docs.jpg" alt="AI Pods Docs by OnlyOne" width="100%" style="border-radius: 8px;">
+</p>
+
 # 📜 AI Pods Enterprise (SaaS) - Documentación & Especificaciones (`aipods-docs`)
 
 Este repositorio contiene la documentación oficial, las especificaciones ejecutables SDD, el backlog del producto y los contratos OpenAPI de **AI Pods Enterprise SaaS Platform**.
