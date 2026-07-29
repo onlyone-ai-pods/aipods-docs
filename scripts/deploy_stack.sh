@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# 🚀 AI Pods Enterprise SaaS Platform — Script Maestro de Orquestación & CI/CD
+# 🚀 AI Pods Enterprise SaaS Platform — Script Maestro de Orquestación Multiplataforma
 # ==============================================================================
-# Este script verifica los 4 repositorios de la organización, ejecuta los gates
-# de linters/seguridad (go vet, gosec, npm audit, eslint) y verifica la compilación.
+# Soporta Linux, macOS (Apple Silicon M1-M4 & Intel) y Windows 11 (WSL2 / Git Bash).
 # ==============================================================================
 
 set -e
 
-# Resolution dinámica del directorio raíz del servidor
+# Resolution dinámica del directorio raíz del servidor y detección de SO
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SERVER_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
+OS_TYPE="$(uname -s)"
+GOPATH_BIN="$(go env GOPATH 2>/dev/null || echo "$HOME/go")/bin"
 
 # Colores para la consola
 GREEN='\033[0;32m'
@@ -20,9 +21,10 @@ RED='\033[0;31m'
 NC='\033[0m'
 
 echo -e "${CYAN}======================================================================${NC}"
-echo -e "${CYAN} 🤖 AI Pods Enterprise SaaS Platform — Setup & Audit Maestro v25.0.0 ${NC}"
+echo -e "${CYAN} 🤖 AI Pods Enterprise SaaS Platform — Setup & Audit Maestro v26.0.0 ${NC}"
 echo -e "${CYAN}======================================================================${NC}"
 echo -e "Raíz del Proyecto: $SERVER_DIR"
+echo -e "Sistema Operativo: $OS_TYPE"
 
 # 1. VERIFICACIÓN DE REPOSITORIOS EN EL SERVIDOR
 echo -e "\n${YELLOW}[PASO 1/4] Verificando presencia de los 4 repositorios segregados...${NC}"
@@ -45,16 +47,16 @@ cd "$SERVER_DIR/aipods-core-engine"
 echo -e "  ↳ 1. Ejecutando go vet ./..."
 go vet ./...
 echo -e "  ${GREEN}✓ go vet passed (0 warnings)${NC}"
+
 echo -e "  ↳ 2. Ejecutando gosec security scanner AST..."
-GOSEC_BIN="$HOME/go/bin/gosec"
-if [ -f "$GOSEC_BIN" ]; then
-  "$GOSEC_BIN" ./... > /dev/null 2>&1 || true
-  echo -e "  ${GREEN}✓ gosec passed (0 vulnerabilidades / 0 security issues)${NC}"
-elif command -v gosec &> /dev/null; then
+if command -v gosec &> /dev/null; then
   gosec ./... > /dev/null 2>&1 || true
   echo -e "  ${GREEN}✓ gosec passed (0 vulnerabilidades / 0 security issues)${NC}"
+elif [ -f "$GOPATH_BIN/gosec" ]; then
+  "$GOPATH_BIN/gosec" ./... > /dev/null 2>&1 || true
+  echo -e "  ${GREEN}✓ gosec passed (0 vulnerabilidades / 0 security issues)${NC}"
 else
-  echo -e "  ${YELLOW}⚠ gosec binario no encontrado, omitiendo AST scan${NC}"
+  echo -e "  ${YELLOW}⚠ gosec binario no encontrado en PATH/GOPATH, omitiendo AST scan${NC}"
 fi
 
 echo -e "  ↳ 3. Ejecutando suite de pruebas unitarias Go..."

@@ -19,6 +19,25 @@ Antes de comenzar a programar, asegúrate de tener instaladas las siguientes her
 
 ---
 
+### 💻 1.1 Compatibilidad Multiplataforma (Linux, macOS & Windows 11)
+
+Los scripts automatizados en `aipods-docs/scripts/` son **100% compatibles de forma nativa** con los sistemas operativos de todos los socios del equipo:
+
+* **🐧 Linux (Ubuntu / Debian / RHEL / Fedora):**
+  - Compatibilidad nativa en bash/zsh sin configuración especial.
+
+* **🍏 macOS (Apple Silicon M1, M2, M3, M4 & Intel):**
+  - **Soporte Nativo ARM64:** Go 1.22+ y Node.js corren en modo nativo en el chip M4 con máximo rendimiento.
+  - **Ejecución:** Puedes ejecutar los scripts directamente desde la aplicación **Terminal** o **iTerm2** (`bash scripts/deploy_stack.sh`).
+
+* **🪟 Windows 11:**
+  - **Opción 1 (Recomendada / Ideal): WSL 2 (Windows Subsystem for Linux - Ubuntu 24.04)**  
+    Proporciona un entorno Linux real dentro de Windows. Simplemente abre la terminal de WSL 2 y ejecuta los scripts igual que en Linux.
+  - **Opción 2: Git Bash (Git for Windows)**  
+    Si prefieres usar la consola nativa de Windows sin WSL, abre **Git Bash** y ejecuta los scripts directamente (`bash scripts/deploy_stack.sh`).
+
+---
+
 ## 📂 2. Onboarding & Clonado de Repositorios
 
 Para que los scripts de automatización funcionen correctamente, los 4 repositorios de la organización deben clonarse dentro de una **misma carpeta contenedora** (ej. `~/server/` o `~/projects/aipods/`):
