@@ -80,11 +80,11 @@ Ejecuta 5 pruebas HTTP automatizadas contra los endpoints REST (`/healthz`, `/sa
 bash aipods-docs/scripts/test_functional_e2e.sh
 ```
 
-### 3.4 Detención del Stack Local (`stop_local_stack.sh`)
-Detiene limpiamente todos los procesos de Go y Vite en ejecución:
+### 3.5 Setup Automático del MCP Grafo de Memoria (`setup_mcp.sh`)
+Configura automáticamente el servidor `codebase-memory-mcp` generando el manifiesto `.mcp.json` en los 4 repositorios para que las herramientas de IA (`search_graph`, `trace_path`, `get_code_snippet`) funcionen instantáneamente:
 
 ```bash
-bash aipods-docs/scripts/stop_local_stack.sh
+bash aipods-docs/scripts/setup_mcp.sh
 ```
 
 ---

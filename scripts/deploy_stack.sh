@@ -26,6 +26,11 @@ echo -e "${CYAN}================================================================
 echo -e "Raíz del Proyecto: $SERVER_DIR"
 echo -e "Sistema Operativo: $OS_TYPE"
 
+# 0. CONFIGURACIÓN AUTOMÁTICA DE MCP (codebase-memory-mcp)
+if [ -f "$SCRIPT_DIR/setup_mcp.sh" ]; then
+  bash "$SCRIPT_DIR/setup_mcp.sh" > /dev/null 2>&1 || true
+fi
+
 # 1. VERIFICACIÓN DE REPOSITORIOS EN EL SERVIDOR
 echo -e "\n${YELLOW}[PASO 1/4] Verificando presencia de los 4 repositorios segregados...${NC}"
 
