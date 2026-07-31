@@ -27,6 +27,7 @@ A continuación se detalla el listado de los 13 GitHub Issues registrados en el 
 | **`#12`** | `[FEAT] Motor de Orquestación de Enjambre de Micro AI Pods (Swarm Protocol)` | `feature`, `needs-spec`, `pod-core` | `OPEN` | [Issue #12](https://github.com/onlyone-ai-pods/aipods-docs/issues/12) |
 | **`#13`** | `[FEAT] Motor de Resiliencia Enterprise (2FA OTP Interruption, NATS JobId, Saga Pattern & Policy Rulesets)` | `feature`, `needs-spec`, `pod-core` | `OPEN` | [Issue #13](https://github.com/onlyone-ai-pods/aipods-docs/issues/13) |
 | **`#14`** | `[FEAT] Purga Reactiva de Caché Redis por Feedback 👎 y RPA AFIP` | `feature`, `spec-approved`, `pod-essential` | `CLOSED` | [Issue #14](https://github.com/onlyone-ai-pods/aipods-docs/issues/14) |
+| **`#16`** | `[FEAT] Integración Frontend (Customer Portal & Admin Hub) para Native Vault Cifrado AES-256` | `feature`, `spec-approved`, `frontend-customer` | `CLOSED` | [Issue #16](https://github.com/onlyone-ai-pods/aipods-docs/issues/16) |
 
 ---
 
