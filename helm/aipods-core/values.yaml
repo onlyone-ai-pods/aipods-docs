@@ -1,0 +1,33 @@
+replicaCount: 3
+
+image:
+  repository: ghcr.io/onlyone-ai-pods/aipods-core-engine
+  pullPolicy: IfNotPresent
+  tag: "v63.0.0"
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: true
+  className: "nginx"
+  hosts:
+    - host: api.aipods.enterprise.internal
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
