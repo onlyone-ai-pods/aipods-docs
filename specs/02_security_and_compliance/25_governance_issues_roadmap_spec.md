@@ -14,7 +14,7 @@ A continuación se detalla el listado de los 13 GitHub Issues registrados en el 
 | ID Issue | Título de la Característica | Etiquetas (Labels) | Estado | URL GitHub |
 | :---: | :--- | :--- | :---: | :--- |
 | **`#1`** | `[FEAT] Cifrado At-Rest de Embeddings en Qdrant (AES-256 GCM)` | `feature`, `needs-spec`, `pod-core` | `OPEN` | [Issue #1](https://github.com/onlyone-ai-pods/aipods-docs/issues/1) |
-| **`#2`** | `[FEAT] Rate Limiting y Throttling Dinámico de Tokens por IP y Tenant` | `feature`, `needs-spec`, `pod-core` | `OPEN` | [Issue #2](https://github.com/onlyone-ai-pods/aipods-docs/issues/2) |
+| **`#2`** | `[FEAT] Rate Limiting y Throttling Dinámico de Tokens por IP y Tenant` | `feature`, `pod-core`, `redis` | `CLOSED` | [Issue #2](https://github.com/onlyone-ai-pods/aipods-docs/issues/2) |
 | **`#3`** | `[FEAT] Pipeline de CI/CD Automático en GitHub Actions con Docker y Helm` | `feature`, `needs-spec` | `OPEN` | [Issue #3](https://github.com/onlyone-ai-pods/aipods-docs/issues/3) |
 | **`#4`** | `[FEAT] Dashboard de Telemetría OpenTelemetry & Prometheus/Grafana` | `feature`, `needs-spec`, `pod-core` | `OPEN` | [Issue #4](https://github.com/onlyone-ai-pods/aipods-docs/issues/4) |
 | **`#5`** | `[FEAT] POD_CORE_NOTIFICATIONS_TELEGRAM: Alertas Push de Cobro y Seguridad` | `feature`, `needs-spec`, `pod-essential` | `OPEN` | [Issue #5](https://github.com/onlyone-ai-pods/aipods-docs/issues/5) |
@@ -26,6 +26,7 @@ A continuación se detalla el listado de los 13 GitHub Issues registrados en el 
 | **`#11`** | `[FEAT] Módulo Híbrido de Gestión de Secretos (BYOV Bitwarden Secrets Manager & Native Vault)` | `feature`, `needs-spec`, `pod-core` | `OPEN` | [Issue #11](https://github.com/onlyone-ai-pods/aipods-docs/issues/11) |
 | **`#12`** | `[FEAT] Motor de Orquestación de Enjambre de Micro AI Pods (Swarm Protocol)` | `feature`, `needs-spec`, `pod-core` | `OPEN` | [Issue #12](https://github.com/onlyone-ai-pods/aipods-docs/issues/12) |
 | **`#13`** | `[FEAT] Motor de Resiliencia Enterprise (2FA OTP Interruption, NATS JobId, Saga Pattern & Policy Rulesets)` | `feature`, `needs-spec`, `pod-core` | `OPEN` | [Issue #13](https://github.com/onlyone-ai-pods/aipods-docs/issues/13) |
+| **`#14`** | `[FEAT] Purga Reactiva de Caché Redis por Feedback 👎 y RPA AFIP` | `feature`, `spec-approved`, `pod-essential` | `CLOSED` | [Issue #14](https://github.com/onlyone-ai-pods/aipods-docs/issues/14) |
 
 ---
 
