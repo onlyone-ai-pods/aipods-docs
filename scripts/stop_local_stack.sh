@@ -20,9 +20,11 @@ echo -e "${CYAN}================================================================
 
 # 1. Detener Backend Core Engine (Go) en Puerto 8080
 echo -e "\n${YELLOW}[1/3] Deteniendo Motor Core Go (Backend REST API en port 8080)...${NC}"
+fuser -k 8080/tcp || true
 pkill -f "$SERVER_DIR/aipods-core-engine/server" || true
+pkill -f "./server" || true
 pkill -f "go run ./cmd/server" || true
-echo -e "${GREEN}  ✓ Backend Core Engine detenido${NC}"
+echo -e "${GREEN}  ✓ Backend Core Engine detenido y puerto 8080 liberado${NC}"
 
 # 2. Detener Frontend Customer Portal en Puerto 3000
 echo -e "\n${YELLOW}[2/3] Deteniendo Portal de Clientes (Customer Frontend en port 3000)...${NC}"
