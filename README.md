@@ -42,9 +42,9 @@ bash scripts/deploy_stack.sh
 
 El script ejecutará automáticamente:
 1. Auditoría y Sincronización Segregada de Skills (`sync_skills.sh`).
-2. Verification Backend Go (`go vet`, `gosec` AST 0 vulnerabilidades, `go test` 100% PASS).
-3. Verification Frontend React (`npm audit` 0 vulnerabilidades, `ESLint` y `Vite Build`).
-4. Verificación de compilación del Servidor Go Core.
+2. Verificación del Backend Go (análisis `go vet`, scanner `gosec` AST con 0 vulnerabilidades, suite `go test` al 100% exitosa).
+3. Verificación de los Frontends React (`npm audit` con 0 vulnerabilidades, validación `ESLint` y compilación de `Vite`).
+4. Verificación de compilación del Servidor Go Core Engine.
 
 ---
 
