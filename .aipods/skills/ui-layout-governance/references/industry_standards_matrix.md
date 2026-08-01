@@ -15,9 +15,10 @@ Este documento define las salvaguardas normativas que la Skill **`ui-layout-gove
 - **Relación de Contraste de Color**: Todo texto principal sobre fondo oscuro o claro debe cumplir una relación de contraste mínima de **7:1** (cumplido en paleta `--accent-cyan: #00f2fe` sobre `--bg-primary: #0a0d14`).
 - **Acción ante Violación**: `🛑 REJECT — Relación de contraste inferior a 7:1 en texto principal.`
 
-### 3. Full-Width 27" / 4K (Aprovechamiento de Pantalla - SPEC-CORE-40)
-- **Ancho Fluido 100%**: Está estrictamente prohibido reimponer contenedores encajonados (`max-width: 1300px`) en monitores grandes de 27" o superiores. El contenido debe abarcar el 100% del viewport con `padding: 0 32px;`.
-- **Acción ante Violación**: `🛑 REJECT — Reimposición de max-width rígido encajonado en pantallas grandes.`
+### 3. Full-Width Fluid Adaptativo Multi-Pantalla (Aprovechamiento de Pantalla - SPEC-CORE-40)
+- **Ancho Fluido 100%**: Está estrictamente prohibido reimponer contenedores encajonados (`max-width` rígidos) que desperdicien pantalla útil.
+- **Soporte Multi-Dispositivo (No Limitado a 27")**: Aplica de forma fluida y adaptativa a tablets desde 8 pulgadas ($\ge 768\text{px}$), laptops, monitores de 22", 24", 27", 32", 4K o UltraWide.
+- **Acción ante Violación**: `🛑 REJECT — Reimposición de max-width rígido encajonado que desperdicie espacio de pantalla disponible.`
 
 ### 4. SOC 2 Type II & ISO 27001 (Monitoreo sin Puntos Ciegos)
 - **Preservación de Alertas de Severidad**: Ningún rediseño puede eliminar o volver invisible los badges de alerta (🔴 Crítico, 🟡 Advertencia, 🟢 Normal).

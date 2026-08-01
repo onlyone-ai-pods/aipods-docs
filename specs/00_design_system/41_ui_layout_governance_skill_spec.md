@@ -42,7 +42,7 @@ graph TD
 | **ISO 9241-210 (Ergonomía)** | Prevención de fatiga en turnos de 6-8h y blancos táctiles $\ge 44\text{px}$. | Rechazar si la superficie de toque es $<44\text{px}$ o si se fuerza scroll vertical masivo. |
 | **WCAG 2.1 AAA (Accesibilidad)** | Contraste de texto mínimo 7:1 en temas oscuros y claros. | Rechazar si la relación de contraste cae por debajo de 7:1. |
 | **SOC 2 Type II & ISO 27001** | Sin puntos ciegos ni ocultamiento de alertas de severidad. | Rechazar si se eliminan Badges de Alerta de Severidad o notificaciones flotantes. |
-| **Full-Width Fluid 100%** | Aprovechamiento del 100% del ancho útil en monitores de 27"/4K. | Rechazar si se vuelve a encajonar la vista a `max-width` fijosa < 1400px en monitores grandes. |
+| **Full-Width Fluid Multi-Pantalla** | Aprovechamiento del 100% del ancho útil (Tablets 8"+, Laptops, 22", 24", 27", 4K, UltraWide). | Rechazar si se vuelve a encajonar la vista a `max-width` rígidos desperdiciando pantalla. |
 
 ---
 
@@ -52,7 +52,7 @@ graph TD
 |:---:|---|---|:---:|---|
 | `[C1]` | `SUB_SIDEBAR_CONTAINER` | **ISO 9241-210** | ✅ `COMPLIANT` | Superficie útil táctil mantenida a $\ge 44\text{px}$. |
 | `[B1]` | `MAIN_TAB_NAVIGATION_BAR` | **SOC 2 Type II** | ✅ `COMPLIANT` | Preservación de badges de alerta de severidad (🔴 Crítico). |
-| `[D1]` | `MAIN_CONTENT_PANEL` | **Full-Width 27"** | ✅ `COMPLIANT` | Ancho fluido al 100% sin encajonado en monitores grandes. |
+| `[D1]` | `MAIN_CONTENT_PANEL` | **Full-Width Fluid** | ✅ `COMPLIANT` | Ancho fluido adaptativo al 100% (Tablets 8"+, 22", 24", 27"+). |
 | `[A1]` | `BRAND_HEADER_CONTAINER` | **WCAG 2.1 AAA** | ✅ `COMPLIANT` | Relación de contraste de color $\ge 7:1$ en tema oscuro. |
 
 ---
@@ -62,7 +62,7 @@ graph TD
 ```gherkin
 Feature: Skill ui-layout-governance & Validación de Impacto de Layout
 
-  Scenario: Propuesta de Cambio que Invalida ISO 9241 o Full-Width 27"
+  Scenario: Propuesta de Cambio que Invalida ISO 9241 o Full-Width Fluid
     Given un desarrollador o agente intentando modificar `index.css`
     When el cambio intenta reinstaurar un `max-width: 1200px` o reducir botones a 30px
     Then la Skill `ui-layout-governance` genera una Alerta de Rechazo (REJECT)

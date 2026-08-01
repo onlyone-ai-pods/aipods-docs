@@ -28,7 +28,7 @@ Antes de renombrar o modificar clases CSS o componentes, verificar el nombre ofi
 Verificar que la modificación propuesta NO viole ninguna regla de [industry_standards_matrix.md](file:///home/martin/server/aipods-docs/.aipods/skills/ui-layout-governance/references/industry_standards_matrix.md):
 - ❌ **ISO 9241-210**: No reducir botones/targets táctiles por debajo de $44\text{px}$. No reimponer scroll vertical masivo en turnos de 6-8h.
 - ❌ **WCAG 2.1 AAA**: Mantener relación de contraste de color $\ge 7:1$.
-- ❌ **Full-Width 27"**: No reinstaurar `max-width` rígidos $< 1400\text{px}$ en monitores grandes.
+- ❌ **Full-Width Fluid Adaptativo**: No reinstaurar `max-width` rígidos encajonados que desperdicien pantalla útil (aplica a tablets de 8"+, laptops y monitores de 22", 24", 27", 4K o UltraWide).
 - ❌ **SOC 2 Type II**: No eliminar ni ocultar los **Badges de Alerta de Severidad** (🔴 Crítico, 🟡 Advertencia).
 
 ### Paso 3: Generar la Matriz de Evaluación de Impacto en la Spec
@@ -39,5 +39,5 @@ Verificar que la modificación propuesta NO viole ninguna regla de [industry_sta
 |:---:|---|---|:---:|---|
 | `[C1]` | `SUB_SIDEBAR_CONTAINER` | **ISO 9241-210** | ✅ `COMPLIANT` | Superficie útil táctil mantenida a $\ge 44\text{px}$. |
 | `[B1]` | `MAIN_TAB_NAVIGATION_BAR` | **SOC 2 Type II** | ✅ `COMPLIANT` | Preservación de badges de alerta de severidad (🔴 Crítico). |
-| `[D1]` | `MAIN_CONTENT_PANEL` | **Full-Width 27"** | ✅ `COMPLIANT` | Ancho fluido al 100% sin encajonado en monitores grandes. |
+| `[D1]` | `MAIN_CONTENT_PANEL` | **Full-Width Fluid** | ✅ `COMPLIANT` | Ancho fluido adaptativo al 100% (Tablets 8"+, 22", 24", 27"+). |
 | `[A1]` | `BRAND_HEADER_CONTAINER` | **WCAG 2.1 AAA** | ✅ `COMPLIANT` | Relación de contraste de color $\ge 7:1$ en tema oscuro. |
