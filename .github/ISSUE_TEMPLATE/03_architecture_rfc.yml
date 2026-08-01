@@ -1,0 +1,37 @@
+name: "🏛️ 3. Architecture RFC & System Specification"
+description: "Propuesta de cambio estructural de arquitectura, refactorización masiva o nuevo Estándar ISO/SOC 2."
+title: "[ARCH] "
+labels: ["architecture", "spec-approved"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por enviar una propuesta de arquitectura RFC en **AI Pods Enterprise SaaS Platform**.
+  - type: input
+    id: rfc_title
+    attributes:
+      label: "Título Corto de la Propuesta (RFC)"
+      placeholder: "Ej: Introducción de Bitwarden Secrets Manager"
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: "Motivación & Justificación Arquitectónica"
+      placeholder: "Explica por qué este cambio es necesario y qué beneficios aporta a la plataforma..."
+    validations:
+      required: true
+  - type: textarea
+    id: proposed_changes
+    attributes:
+      label: "Propuesta de Cambios Estructurales"
+      placeholder: "Describe los módulos, componentes o repositorios que sufrirán modificaciones..."
+    validations:
+      required: true
+  - type: textarea
+    id: trade_offs
+    attributes:
+      label: "Análisis de Pros y Contras (Trade-offs)"
+      placeholder: "Detalla las ventajas y los riesgos de implementar esta arquitectura..."
+    validations:
+      required: true
