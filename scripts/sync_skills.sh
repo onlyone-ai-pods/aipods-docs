@@ -35,6 +35,16 @@ if [ ! -f "$ONBOARDING_FILE" ]; then
 fi
 echo -e "  ${GREEN}✓ Guía de Onboarding presente y actualizada al 100%${NC}"
 
+# 1.2 VERIFICACIÓN AUTOMATIZADA DE ENLACES Y RUTAS ABSOLUTAS EN MARKDOWN
+echo -e "↳ 1.2 Auditando enlaces Markdown y previniendo rutas absolutas 'file://'..."
+DOCS_DIR="$SERVER_DIR/aipods-docs"
+if grep -rn "file:///home/" "$DOCS_DIR/specs" "$DOCS_DIR/docs" "$DOCS_DIR/README.md" > /dev/null 2>&1; then
+  echo -e "  ${RED}✗ Error: Se detectaron enlaces locales estáticos 'file:///home/...' en la documentación.${NC}"
+  grep -rn "file:///home/" "$DOCS_DIR/specs" "$DOCS_DIR/docs" "$DOCS_DIR/README.md"
+  exit 1
+fi
+echo -e "  ${GREEN}✓ Auditoría de enlaces Markdown superada (0 enlaces absolutos rotos)${NC}"
+
 # 2. DISTRIBUCIÓN SEGREGADA POR REPOSITORIO
 echo -e "↳ 2. Sincronizando skills segregadas en los 3 repositorios..."
 

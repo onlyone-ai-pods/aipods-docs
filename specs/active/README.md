@@ -13,5 +13,5 @@ Este directorio alberga las **Especificaciones Activas Temporales (`IN_PROGRESS`
 
 3. **Consolidación & Cierre (`CLOSED`)**: Una vez que el Issue se cierra y se publica el Release Tag en GitHub:
    - El contenido de la spec se **appendea como sub-capítulo en el Documento Maestro por Épica** correspondiente (`01_CORE`, `02_SECURITY`, `03_ADMIN_HUB` o `04_CUSTOMER_PORTAL`).
-   - Se actualiza el [SPEC_MASTER_INDEX.md](file:///home/martin/server/aipods-docs/specs/SPEC_MASTER_INDEX.md).
+   - Se actualiza el [SPEC_MASTER_INDEX.md](../SPEC_MASTER_INDEX.md).
    - Se elimina el archivo borrador temporal de `specs/active/`.
