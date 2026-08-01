@@ -1,0 +1,49 @@
+name: "🚀 1. Feature Request & Spec Proposal"
+description: "Proponer una nueva funcionalidad, especificación SDD o nuevo AI Pod para la plataforma."
+title: "[FEAT] "
+labels: ["feature", "needs-spec"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por proponer una nueva especificación en **AI Pods Enterprise SaaS Platform**.
+        Por favor completa los campos requeridos para mantener la trazabilidad SDD (CMMI Nivel 4).
+  - type: input
+    id: spec_id
+    attributes:
+      label: "ID de Especificación Sugerido (si aplica)"
+      placeholder: "Ej: SPEC-CORE-43"
+    validations:
+      required: false
+  - type: dropdown
+    id: domain
+    attributes:
+      label: "Dominio Afectado del Ecosistema"
+      options:
+        - "Backend Go Engine Core (aipods-core-engine)"
+        - "Customer Portal React (aipods-frontend-customer)"
+        - "Admin Review Hub React (aipods-frontend-admin)"
+        - "Gobernanza & Documentación (aipods-docs)"
+        - "Multi-Repo / Infraestructura Swarm"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: "Visión & Descripción del Requerimiento"
+      placeholder: "Describe claramente la necesidad de negocio o técnica que este requerimiento resuelve..."
+    validations:
+      required: true
+  - type: textarea
+    id: bdd_scenarios
+    attributes:
+      label: "Escenarios Criterios de Aceptación (Gherkin BDD)"
+      placeholder: |
+        Feature: Nombre de la Funcionalidad
+
+        Scenario: Flujo Exitoso
+          Given un usuario autenticado como Administrador
+          When ejecuta la acción X
+          Then el sistema responde con HTTP 200 OK
+    validations:
+      required: true

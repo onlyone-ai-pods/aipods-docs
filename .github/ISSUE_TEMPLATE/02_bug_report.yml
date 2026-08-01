@@ -1,0 +1,44 @@
+name: "🐛 2. Bug Report"
+description: "Reportar un fallo de producción, error de compilación o ruptura de contrato de API."
+title: "[BUG] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por reportar una anomalía en **AI Pods Enterprise SaaS Platform**.
+  - type: dropdown
+    id: severity
+    attributes:
+      label: "Nivel de Severidad"
+      options:
+        - "🔴 Crítico (Bloquea el pipeline de deploy o caída de servicio)"
+        - "🟡 Advertencia (Fallo parcial o error de UI de baja frecuencia)"
+        - "🟢 Menor (Toma de detalle visual o typo en documentación)"
+    validations:
+      required: true
+  - type: textarea
+    id: error_description
+    attributes:
+      label: "Descripción del Error & Comportamiento Actual"
+      placeholder: "Explica detalladamente qué falló y cuál era el comportamiento esperado..."
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction_steps
+    attributes:
+      label: "Pasos para Reproducir"
+      placeholder: |
+        1. Ejecutar el comando '...'
+        2. Navegar a la pestaña '...'
+        3. Hacer click en '...'
+        4. Ver el mensaje de error en la consola
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: "Logs o Stack Traces de Consola"
+      placeholder: "Pega aquí los logs de Go, Vite o Terminal..."
+    validations:
+      required: false
