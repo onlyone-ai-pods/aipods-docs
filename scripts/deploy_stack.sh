@@ -45,6 +45,11 @@ for repo in "${REPOS[@]}"; do
   fi
 done
 
+# 1.1 AUDITORÍA & SINCRONIZACIÓN AUTOMÁTICA DE SKILLS SEGREGADAS (SPEC-CORE-41)
+if [ -f "$SCRIPT_DIR/sync_skills.sh" ]; then
+  bash "$SCRIPT_DIR/sync_skills.sh"
+fi
+
 # 2. AUDITORÍA DE SEGURIDAD & LINTERS DEL ENGINE CORE (GO)
 echo -e "\n${YELLOW}[PASO 2/4] Ejecutando Quality & Security Gate en Backend Go (aipods-core-engine)...${NC}"
 cd "$SERVER_DIR/aipods-core-engine"
