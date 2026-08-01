@@ -4,7 +4,7 @@
 
 # 📜 AI Pods Enterprise SaaS Platform — Documentación & Gobernanza SDD
 
-[![Release Tag](https://img.shields.io/badge/Release-v76.0.0-00f2fe?style=for-the-badge&logo=github)](https://github.com/onlyone-ai-pods/aipods-docs)
+[![Release Tag](https://img.shields.io/badge/Release-v77.0.0-00f2fe?style=for-the-badge&logo=github)](https://github.com/onlyone-ai-pods/aipods-docs)
 [![CMMI Level 4](https://img.shields.io/badge/CMMI-Level_4_Certified-10b981?style=for-the-badge&logo=checkmarx)](https://github.com/onlyone-ai-pods/aipods-docs)
 [![ISO 27001 & SOC 2](https://img.shields.io/badge/Security-ISO_27001_%7C_SOC_2-3b82f6?style=for-the-badge&logo=shield)](https://github.com/onlyone-ai-pods/aipods-docs)
 [![Backend Go](https://img.shields.io/badge/Engine-Go_1.22+-00ADD8?style=for-the-badge&logo=go)](https://github.com/onlyone-ai-pods/aipods-core-engine)
@@ -25,10 +25,10 @@ Este repositorio contiene la fuente autoritativa de documentación, especificaci
 ## 📚 Arquitectura Documental Consolidada (ISO/IEC 26514 & ISO 9001:2015 7.5.3)
 
 - 📄 **[`specs/SPEC_MASTER_INDEX.md`](specs/SPEC_MASTER_INDEX.md):** Índice Maestro Dinámico de Especificaciones SDD.
-- 📂 **[`specs/01_CORE_ENGINE_MASTER_SPEC.md`](specs/01_CORE_ENGINE_MASTER_SPEC.md):** Especificación Maestra de Backend Go, Swarm Protocol, Saga Pattern & CMMI Level 4.
-- 📂 **[`specs/02_SECURITY_AND_COMPLIANCE_MASTER_SPEC.md`](specs/02_SECURITY_AND_COMPLIANCE_MASTER_SPEC.md):** Especificación Maestra de ISO 9001, SOC 2, Vault AES-256 e IP Audit Trail.
-- 📂 **[`specs/03_ADMIN_HUB_GOVERNANCE_MASTER_SPEC.md`](specs/03_ADMIN_HUB_GOVERNANCE_MASTER_SPEC.md):** Especificación Maestra de Admin Hub, 5 Pestañas Modulares, Sub-Sidebar Tablets 8"+ & Full-Width 100%.
-- 📂 **[`specs/04_CUSTOMER_PORTAL_MASTER_SPEC.md`](specs/04_CUSTOMER_PORTAL_MASTER_SPEC.md):** Especificación Maestra de Customer Portal, Invitaciones & UI Layout Governance Skill.
+- 📂 **[`specs/01_CORE_ENGINE_MASTER_SPEC.md`](specs/01_CORE_ENGINE_MASTER_SPEC.md):** Especificación Maestra de Backend Engine: Orquestación Concurrente Goroutines (Swarm Protocol), Patrón Saga Distribuido & Telemetría CMMI Nivel 4.
+- 📂 **[`specs/02_SECURITY_AND_COMPLIANCE_MASTER_SPEC.md`](specs/02_SECURITY_AND_COMPLIANCE_MASTER_SPEC.md):** Especificación Maestra de Seguridad & Cumplimiento Normativo (SGSI): Cifrado AES-256-GCM, Native Vault, Firma SHA-256 & Dossier de Auditoría ISO 27001 / SOC 2.
+- 📂 **[`specs/03_ADMIN_HUB_GOVERNANCE_MASTER_SPEC.md`](specs/03_ADMIN_HUB_GOVERNANCE_MASTER_SPEC.md):** Especificación Maestra de Gobernanza del Admin Hub: Consola de Supervisión Senior (Human-in-the-Loop), Autenticación 2FA TOTP, Ergonomía Adaptativa Multi-Pantalla (ISO 9241-210) & Audit Trail de IP/User-Agent.
+- 📂 **[`specs/04_CUSTOMER_PORTAL_MASTER_SPEC.md`](specs/04_CUSTOMER_PORTAL_MASTER_SPEC.md):** Especificación Maestra del Customer Portal: Provisionamiento IAM con Control de Acceso RBAC, Interfaz Command Palette (Slash Commands) & Protocolo LIEP de Gobernanza Visual.
 
 ---
 
