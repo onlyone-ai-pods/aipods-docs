@@ -46,7 +46,18 @@ graph TD
 
 ---
 
-## 4. Escenarios BDD
+## 4. Matriz de Evaluación de Impacto de Layout (Protocolo LIEP)
+
+| Código Elemento | Componente del Layout | Estándar Evaluado | Estado / Resultado | Justificación Técnica & Salvaguarda |
+|:---:|---|---|:---:|---|
+| `[C1]` | `SUB_SIDEBAR_CONTAINER` | **ISO 9241-210** | ✅ `COMPLIANT` | Superficie útil táctil mantenida a $\ge 44\text{px}$. |
+| `[B1]` | `MAIN_TAB_NAVIGATION_BAR` | **SOC 2 Type II** | ✅ `COMPLIANT` | Preservación de badges de alerta de severidad (🔴 Crítico). |
+| `[D1]` | `MAIN_CONTENT_PANEL` | **Full-Width 27"** | ✅ `COMPLIANT` | Ancho fluido al 100% sin encajonado en monitores grandes. |
+| `[A1]` | `BRAND_HEADER_CONTAINER` | **WCAG 2.1 AAA** | ✅ `COMPLIANT` | Relación de contraste de color $\ge 7:1$ en tema oscuro. |
+
+---
+
+## 5. Escenarios BDD
 
 ```gherkin
 Feature: Skill ui-layout-governance & Validación de Impacto de Layout

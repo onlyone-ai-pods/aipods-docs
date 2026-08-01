@@ -32,14 +32,12 @@ Verificar que la modificación propuesta NO viole ninguna regla de [industry_sta
 - ❌ **SOC 2 Type II**: No eliminar ni ocultar los **Badges de Alerta de Severidad** (🔴 Crítico, 🟡 Advertencia).
 
 ### Paso 3: Generar la Matriz de Evaluación de Impacto en la Spec
-Incluir la siguiente tabla en la especificación del cambio:
 
-```markdown
 ### 📊 Matriz de Evaluación de Impacto de Layout (Protocolo LIEP)
 
-| Componente del Layout | Estándar Evaluado | Estado / Resultado | Justificación Técnica |
-|---|---|:---:|---|
-| `[C1] SUB_SIDEBAR_CONTAINER` | ISO 9241-210 | ✅ COMPLIANT | Target táctil mantenido a 44px. |
-| `[B1] MAIN_TAB_NAVIGATION_BAR` | SOC 2 Type II | ✅ COMPLIANT | Badges de alerta de severidad preservados. |
-| `[D1] MAIN_CONTENT_PANEL` | Full-Width 27" | ✅ COMPLIANT | Ancho fluido al 100% sin márgenes encajonados. |
-```
+| Código Elemento | Componente del Layout | Estándar Evaluado | Estado / Resultado | Justificación Técnica & Salvaguarda |
+|:---:|---|---|:---:|---|
+| `[C1]` | `SUB_SIDEBAR_CONTAINER` | **ISO 9241-210** | ✅ `COMPLIANT` | Superficie útil táctil mantenida a $\ge 44\text{px}$. |
+| `[B1]` | `MAIN_TAB_NAVIGATION_BAR` | **SOC 2 Type II** | ✅ `COMPLIANT` | Preservación de badges de alerta de severidad (🔴 Crítico). |
+| `[D1]` | `MAIN_CONTENT_PANEL` | **Full-Width 27"** | ✅ `COMPLIANT` | Ancho fluido al 100% sin encajonado en monitores grandes. |
+| `[A1]` | `BRAND_HEADER_CONTAINER` | **WCAG 2.1 AAA** | ✅ `COMPLIANT` | Relación de contraste de color $\ge 7:1$ en tema oscuro. |
