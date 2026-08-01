@@ -44,12 +44,15 @@
 
 ---
 
-## 4. SPEC-CORE-45: Formularios UI de Selección de Idioma, Región y Moneda Localizada
+## 4. SPEC-CORE-45: Protocolo de Detección Automática de Idioma & UI de Configuración de Perfil
 
-- **Componente Selector en Perfil (`SettingsView.jsx`)**:
-  - Selector desplegable de **Idioma Preferido** (`Español Neutro`, `Português`, `English`).
-  - Selector desplegable de **País / Región de Operación** (`🇦🇷 Argentina`, `🇨🇱 Chile`, `🇵🇪 Perú`, `🇺🇾 Uruguay`, `🇲🇽 México`, `🇧🇷 Brasil`, `🇺🇸 United States`).
-  - Selector de **Moneda Principal** (`ARS $`, `CLP $`, `PEN S/`, `UYU $`, `MXN $`, `BRL R$`, `USD $`).
+- **Escenario 1: Visitante Anónimo (Landing Page, Sandbox Demo & Pantalla de Login / Sin Sesión)**:
+  - **Auto-Detección Geográfica & Browser Locale**: No se muestran selectores manuales en la cabecera principal. El sistema detecta automáticamente la región y lenguaje mediante `navigator.language` y la geolocalización IP.
+  - *Comportamiento*: Si el usuario navega desde Argentina (`es-AR`), Chile (`es-CL`) o Perú (`es-PE`), la interfaz carga en **Español** (`es`). Si navega desde Brasil (`pt-BR`), carga en **Portugués** (`pt`). En EE.UU. u otros países, carga en **Inglés** (`en`).
+- **Escenario 2: Usuario Autenticado (Clientes, Administradores, Auditores / Con Sesión Iniciada)**:
+  - **Prevalencia Absoluta del Perfil de Usuario**: Una vez iniciado sesión, el sistema ignora la IP geográfica (útil para ejecutivos o clientes que viajan al exterior) y aplica estrictamente el idioma y región configurados en su perfil (`res.partner.lang` de Odoo ERP o `SettingsView.jsx`).
+- **Configuración de Perfil (`SettingsView.jsx`)**:
+  - Unicidad de edición: La modificación de idioma, región (`es_AR`, `es_CL`, `es_PE`, `es_UY`, `es_MX`, `pt_BR`, `en_US`) y moneda (`ARS`, `CLP`, `PEN`, `UYU`, `MXN`, `BRL`, `USD`) se realiza exclusivamente dentro de las configuraciones de la cuenta del usuario.
 - **Modal de Invitación Multi-Idioma (`InviteMemberModal.jsx`)**:
   - Al invitar nuevos miembros con roles RBAC (*Operator, Auditor, Senior Consultant*), el formulario incluye la selección del idioma inicial con el que el nuevo usuario recibirá su correo de bienvenida y accederá al portal.
 - **Persistencia en LocalStorage y Estado Global (`LanguageContext.jsx`)**:
