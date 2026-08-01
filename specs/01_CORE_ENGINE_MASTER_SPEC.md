@@ -44,4 +44,4 @@ Pipeline automatizado con Dockerfile Alpine Multi-Stage (tamaño $< 25\text{MB}$
 Exposición de métricas de proceso cuantitativas en `GET /metrics`:
 - `aipods_cmmi_level4_spec_traceability_index`: 1.00 (100%).
 - `aipods_cmmi_level4_defect_density_per_kloc`: 0.00.
-- `aipods_cmmi_level4_avg_spec_lead_time_hours`: 0.45.
+- `aipods_cmmi_level4_avg_spec_lead_time_hours`: 2.18 (Medición empírica histórica Git v4.0.0 a v78.0.0).
