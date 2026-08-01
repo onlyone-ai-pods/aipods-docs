@@ -1,7 +1,7 @@
 # 🚀 Guía de Onboarding & Flujo de Trabajo Git PR (Pull Requests)
 
 **AI Pods Enterprise SaaS Platform**  
-*Documentación Oficial para Desarrolladores y Socios de Proyecto*
+*Documentación Oficial para Desarrolladores y Socios de Proyecto — Release v77.0.0*
 
 ---
 
@@ -15,7 +15,7 @@ Antes de comenzar a programar, asegúrate de tener instaladas las siguientes her
 | **Node.js & npm** | `18+` / `9+` | Ejecución de los Frontends React/Vite y automatización RPA |
 | **Git** | `2.34+` | Control de versiones distribuido |
 | **GitHub CLI (`gh`)** | `2.20+` | Gestión de Issues y Pull Requests desde la consola |
-| **gosec AST Scanner** | `v2+` | Scanner de vulnerabilidades en Go (`go install github.com/securego/gosec/v2/cmd/gosec@latest`) |
+| **gosec AST Scanner** | `v2+` | Scanner de vulnerabilidades en Go (`gosec ./...`) |
 
 ---
 
@@ -31,8 +31,8 @@ Los scripts automatizados en `aipods-docs/scripts/` son **100% compatibles de fo
   - **Ejecución:** Puedes ejecutar los scripts directamente desde la aplicación **Terminal** o **iTerm2** (`bash scripts/deploy_stack.sh`).
 
 * **🪟 Windows 11:**
-  - **Opción 1 (Recomendada / Ideal): WSL 2 (Windows Subsystem for Linux - Ubuntu 24.04)**  
-    Proporciona un entorno Linux real dentro de Windows. Simplemente abre la terminal de WSL 2 y ejecuta los scripts igual que en Linux.
+  - **Opción 1 (Recomendada): WSL 2 (Ubuntu 24.04)**  
+    Proporciona un entorno Linux real dentro de Windows. Simplemente abre la terminal de WSL 2 y ejecuta los scripts (`bash scripts/deploy_stack.sh`).
   - **Opción 2: Git Bash (Git for Windows)**  
     Si prefieres usar la consola nativa de Windows sin WSL, abre **Git Bash** y ejecuta los scripts directamente (`bash scripts/deploy_stack.sh`).
 
@@ -57,135 +57,35 @@ git clone https://github.com/onlyone-ai-pods/aipods-frontend-admin.git
 
 ## 🛠️ 3. Scripts de Automatización Local (`aipods-docs/scripts/`)
 
-Dentro del repositorio `aipods-docs/scripts/` dispones de 4 scripts bash que automatizan el análisis de calidad, el arranque, las pruebas E2E y la detención del entorno:
+Dentro del repositorio `aipods-docs/scripts/` dispones de los scripts automatizados que ejecutan análisis de calidad y sincronización de skills:
 
-### 3.1 Script Maestro de Auditoría y Verificación (`deploy_stack.sh`)
-Verifica la estructura de los 4 repositorios, ejecuta `go vet`, `gosec`, `go test` y los linters ESLint en los frontends:
-
-```bash
-bash aipods-docs/scripts/deploy_stack.sh
-```
-
-### 3.2 Iniciador del Stack Local en Segundo Plano (`start_local_stack.sh`)
-Levanta el Engine Go en el puerto `8080`, el Portal de Clientes en el puerto `3000` y el Admin Hub en el puerto `3001` con guardado de logs en `logs_local/`:
-
-```bash
-bash aipods-docs/scripts/start_local_stack.sh
-```
-
-### 3.3 Suite de Pruebas Funcionales E2E (`test_functional_e2e.sh`)
-Ejecuta 5 pruebas HTTP automatizadas contra los endpoints REST (`/healthz`, `/sandbox/sessions`, `/sandbox/query`, `/rag/ingest`, `/pods/register`):
-
-```bash
-bash aipods-docs/scripts/test_functional_e2e.sh
-```
-
-### 3.5 Setup Automático del MCP Grafo de Memoria (`setup_mcp.sh`)
-Configura automáticamente el servidor `codebase-memory-mcp` generando el manifiesto `.mcp.json` en los 4 repositorios para que las herramientas de IA (`search_graph`, `trace_path`, `get_code_snippet`) funcionen instantáneamente:
-
-```bash
-bash aipods-docs/scripts/setup_mcp.sh
-```
+1. **`deploy_stack.sh`**: Ejecuta la suite de Quality & Security Gates en los 4 repositorios (auditoría de skills, `go vet`, `gosec`, `go test 100%`, `npm audit`, `ESLint` y compilación).
+2. **`sync_skills.sh`**: Audita 0 rutas hardcoded y distribuye las Agentic Skills segregadas a los repositorios de Backend Go y Frontend React.
+3. **`start_local_stack.sh`**: Arranca los 3 servicios locales en segundo plano (Go Core en `8080`, Customer Portal en `3000`, Admin Hub en `3001`).
+4. **`stop_local_stack.sh`**: Detiene los procesos locales limpios.
 
 ---
 
-## 🔄 4. Flujo de Trabajo Git: Issues, Feature Branches & Pull Requests (PRs)
+## 📚 4. Arquitectura Documental Consolidada (3-Tier SDD)
 
-Seguimos una metodología **Spec-Driven Development (SDD)** estricta. Todo cambio de código debe responder a un **Issue registrado en GitHub** y fusionarse mediante un **Pull Request (PR)** aprobado.
+Las especificaciones del sistema están organizadas bajo la metodología **Spec-Driven Development (SDD)** en los 4 Documentos Maestros por Épica:
 
-```mermaid
-graph TD
-    Issue[1. Seleccionar Issue en GitHub #XX] --> Branch[2. Crear Rama feat/issue-XX-nombre]
-    Branch --> SDD[3. Leer Especificación SDD en aipods-docs/specs/]
-    SDD --> Code[4. Desarrollar Código & Pruebas BDD]
-    Code --> QualityGate[5. Validar con aipods-cli & deploy_stack.sh]
-    QualityGate --> Commit[6. Commit Estándar Odoo: Closes #XX]
-    Commit --> PR[7. Abrir Pull Request gh pr create]
-    PR --> Review[8. Code Review & Aprobación por Socios]
-    Review --> Merge[9. Merge a la rama main & Cierre del Issue]
-```
+- 📄 **[`specs/SPEC_MASTER_INDEX.md`](specs/SPEC_MASTER_INDEX.md):** Índice Maestro Dinámico de Especificaciones SDD.
+- 📂 **[`specs/01_CORE_ENGINE_MASTER_SPEC.md`](specs/01_CORE_ENGINE_MASTER_SPEC.md):** Backend Engine, Swarm Protocol, Saga Pattern & CMMI Level 4.
+- 📂 **[`specs/02_SECURITY_AND_COMPLIANCE_MASTER_SPEC.md`](specs/02_SECURITY_AND_COMPLIANCE_MASTER_SPEC.md):** Seguridad ISO 27001, SOC 2, Vault AES-256 e IP Audit.
+- 📂 **[`specs/03_ADMIN_HUB_GOVERNANCE_MASTER_SPEC.md`](specs/03_ADMIN_HUB_GOVERNANCE_MASTER_SPEC.md):** Admin Hub Governance, Autenticación 2FA TOTP & Ergonomía Multi-Pantalla ISO 9241.
+- 📂 **[`specs/04_CUSTOMER_PORTAL_MASTER_SPEC.md`](specs/04_CUSTOMER_PORTAL_MASTER_SPEC.md):** Customer Portal, IAM RBAC & UI Layout Governance Skill.
 
 ---
 
-### Paso a Paso para Trabajar en un Issue:
+## 🔄 5. Flujo de Trabajo Git & Pull Requests (PRs)
 
-#### 📌 Paso 1: Seleccionar el Issue
-Consulta el roadmap de issues en `aipods-docs/specs/02_security_and_compliance/25_governance_issues_roadmap_spec.md` o ejecuta:
+1. **Creación de Rama:**  
+   `git checkout -b feat/nombre-caracteristica` o `git checkout -b fix/descripcion-bug`
 
-```bash
-gh issue list --repo onlyone-ai-pods/aipods-docs
-```
+2. **Commit con Referencia SDD:**  
+   `git commit -m "[FEAT] modulo: descripción breve (#Issue / SPEC-CORE-XX)"`
 
-#### 🌿 Paso 2: Crear la Rama de Trabajo (Feature Branch)
-Usa el prefijo `feat/` o `fix/` seguido del número de issue:
-
-```bash
-cd aipods-core-engine
-git checkout main
-git pull origin main
-git checkout -b feat/issue-01-cifrado-qdrant
-```
-
-#### 📜 Paso 3: Desarrollar con Criterios SDD / BDD
-Lee la especificación correspondiente en `aipods-docs/specs/`. Asegúrate de implementar la interfaz `pod.BaseAIPod` y los escenarios Gherkin del issue.
-
-#### 🛡️ Paso 4: Ejecutar los Quality Gates Locales
-Antes de enviar el código, asegúrate de que pasa el scanner AST sin vulnerabilidades:
-
-```bash
-# Usando aipods-cli
-aipods-cli validate --path=. --strict
-
-# O ejecutando el script global
-bash ../aipods-docs/scripts/deploy_stack.sh
-```
-
-#### 💾 Paso 5: Commit con Convención Odoo / Git Standard
-El mensaje del commit debe usar las etiquetas oficiales `[FEAT]`, `[FIX]`, `[IMP]` o `[ADD]` e incluir el cierre del issue:
-
-```bash
-git add .
-git commit -m "[FEAT] security: implement AES-256 GCM encryption at rest for Qdrant. Closes #1"
-```
-
-#### 🚀 Paso 6: Enviar el Pull Request (PR)
-Sube tu rama al repositorio remoto y abre el PR en GitHub:
-
-```bash
-# Push de la rama remota
-git push origin feat/issue-01-cifrado-qdrant
-
-# Crear el Pull Request usando la CLI de GitHub
-gh pr create \
-  --repo onlyone-ai-pods/aipods-core-engine \
-  --title "[FEAT] Cifrado At-Rest de Embeddings en Qdrant (AES-256 GCM)" \
-  --body "Implementa la encriptación AES-256 GCM según SPEC-CORE-01. Resuelve Issue #1." \
-  --base main \
-  --head feat/issue-01-cifrado-qdrant
-```
-
-#### 👁️ Paso 7: Revisión por Pares (Code Review) & Merge
-1. Los socios/revisores analizan el diff del PR.
-2. Si los tests automáticos pasan y el código cumple con SDD, se aprueba el PR.
-3. Se realiza **Squash and Merge** hacia `main` y GitHub cierra automáticamente el Issue asociado.
-
----
-
-## 🎯 Resumen de Comandos Frecuentes
-
-```bash
-# Probar el stack entero
-bash aipods-docs/scripts/deploy_stack.sh
-
-# Levantar servidores locales
-bash aipods-docs/scripts/start_local_stack.sh
-
-# Probar la API localmente
-bash aipods-docs/scripts/test_functional_e2e.sh
-
-# Apagar servidores
-bash aipods-docs/scripts/stop_local_stack.sh
-
-# Validar tu Pod antes del PR
-aipods-cli validate --path=./mi_pod --strict
-```
+3. **Publicación y PR en GitHub CLI:**  
+   `git push origin feat/nombre-caracteristica`  
+   `gh pr create --title "[FEAT] modulo: título" --body "Resuelve #Issue / SPEC-CORE-XX"`

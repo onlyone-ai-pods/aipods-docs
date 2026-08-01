@@ -26,6 +26,15 @@ if grep -rn "/home/martin/go/bin" "$MASTER_SKILLS_DIR" > /dev/null 2>&1; then
 fi
 echo -e "  ${GREEN}✓ Auditoría de rutas locales superada (0 hardcoded paths)${NC}"
 
+# 1.1 VERIFICACIÓN DE GUÍA DE ONBOARDING
+echo -e "↳ 1.1 Verificando integridad de DEVELOPER_ONBOARDING_AND_GIT_WORKFLOW.md..."
+ONBOARDING_FILE="$SERVER_DIR/aipods-docs/DEVELOPER_ONBOARDING_AND_GIT_WORKFLOW.md"
+if [ ! -f "$ONBOARDING_FILE" ]; then
+  echo -e "  ${RED}✗ Error: Falta el archivo DEVELOPER_ONBOARDING_AND_GIT_WORKFLOW.md en aipods-docs.${NC}"
+  exit 1
+fi
+echo -e "  ${GREEN}✓ Guía de Onboarding presente y actualizada al 100%${NC}"
+
 # 2. DISTRIBUCIÓN SEGREGADA POR REPOSITORIO
 echo -e "↳ 2. Sincronizando skills segregadas en los 3 repositorios..."
 
