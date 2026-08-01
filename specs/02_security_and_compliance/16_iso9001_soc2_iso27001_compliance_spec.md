@@ -55,6 +55,7 @@ graph TD
 
 ### 3.5 Criterio 5: Privacidad & Auditoría Inmutable (Privacy & Audit Logging)
 * **Audit Trail Inmutable:** Registros de auditoría almacenados en PostgreSQL / Buckets S3 con **Object Lock (WORM - Write Once Read Many)**.
+* **Trazabilidad de Sesión de Administrador (`admin_session_logger.go`):** Captura obligatoria de `ClientIP`, `User-Agent` del navegador y generación de firma criptográfica **SHA-256 Digest** en cada login o mutación administrativa.
 * **Retención de Logs:** Retención mínima de **365 días** accesible únicamente por Auditores de Seguridad.
 
 ---
