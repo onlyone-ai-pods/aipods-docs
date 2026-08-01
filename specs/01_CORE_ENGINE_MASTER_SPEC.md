@@ -59,3 +59,12 @@ $$\text{SLA Availability y Latencia P95} = \text{Percentil 95 de Latencia HTTP} 
 - `aipods_cmmi_level4_avg_spec_lead_time_hours`: 2.18 (Medición empírica histórica Git v4.0.0 a v78.0.0).
 - `aipods_cache_hit_ratio_percent`: 82.40%.
 - `aipods_request_duration_avg_ms`: 11.80 ms.
+
+---
+
+## 6. SPEC-CORE-46: Backend Engine Go Middleware i18n & Bundle Loader
+
+- **Modulo `internal/i18n`**: Administrador de diccionarios de traducción `.json` / `.po` con patrón Singleton (`GetTranslator()`).
+- **Soporte Multi-Idioma (`nicksnyder/go-i18n/v2`)**: Resolución de traducciones y Cascada de Fallback inteligente (`es_XX` ➔ `es` ➔ `en`).
+- **Pruebas Unitarias al 100% (`bundle_test.go`)**: Verificación de resolución de mensajes para `es_AR`, `es_CL`, `pt_BR`, `en_US` y fallback de emergencia.
+
