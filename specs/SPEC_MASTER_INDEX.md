@@ -9,10 +9,10 @@
 
 | Épica / Dominio | Documento Maestro Consolidado | Specs ID Incluidas | Estado |
 |---|---|---|:---:|
-| **01. Core Architecture & Engine** | 📂 [`01_CORE_ENGINE_MASTER_SPEC.md`](specs/01_CORE_ENGINE_MASTER_SPEC.md) | `SPEC-CORE-01` a `15`, `33`, `35`, `36`, `42`, `46` | ✅ `CONSOLIDATED` |
-| **02. Security & Compliance (SGSI)** | 📂 [`02_SECURITY_AND_COMPLIANCE_MASTER_SPEC.md`](file:///home/martin/server/aipods-docs/specs/02_SECURITY_AND_COMPLIANCE_MASTER_SPEC.md) | `SPEC-CORE-16` a `27`, `32`, `34` | ✅ `CONSOLIDATED` |
-| **03. Admin Hub & Governance** | 📂 [`03_ADMIN_HUB_GOVERNANCE_MASTER_SPEC.md`](file:///home/martin/server/aipods-docs/specs/03_ADMIN_HUB_GOVERNANCE_MASTER_SPEC.md) | `SPEC-CORE-28` a `30`, `37`, `38`, `39`, `40` | ✅ `CONSOLIDATED` |
-| **04. Customer Portal & Design System** | 📂 [`04_CUSTOMER_PORTAL_MASTER_SPEC.md`](specs/04_CUSTOMER_PORTAL_MASTER_SPEC.md) | `SPEC-CORE-31`, `41`, `44`, `45` | ✅ `CONSOLIDATED` |
+| **01. Core Architecture & Engine** | 📂 [`01_CORE_ENGINE_MASTER_SPEC.md`](01_CORE_ENGINE_MASTER_SPEC.md) | `SPEC-CORE-01` a `15`, `33`, `35`, `36`, `42`, `46` | ✅ `CONSOLIDATED` |
+| **02. Security & Compliance (SGSI)** | 📂 [`02_SECURITY_AND_COMPLIANCE_MASTER_SPEC.md`](02_SECURITY_AND_COMPLIANCE_MASTER_SPEC.md) | `SPEC-CORE-16` a `27`, `32`, `34` | ✅ `CONSOLIDATED` |
+| **03. Admin Hub & Governance** | 📂 [`03_ADMIN_HUB_GOVERNANCE_MASTER_SPEC.md`](03_ADMIN_HUB_GOVERNANCE_MASTER_SPEC.md) | `SPEC-CORE-28` a `30`, `37`, `38`, `39`, `40` | ✅ `CONSOLIDATED` |
+| **04. Customer Portal & Design System** | 📂 [`04_CUSTOMER_PORTAL_MASTER_SPEC.md`](04_CUSTOMER_PORTAL_MASTER_SPEC.md) | `SPEC-CORE-31`, `41`, `44`, `45` | ✅ `CONSOLIDATED` |
 
 ---
 
