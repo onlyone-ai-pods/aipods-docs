@@ -10,6 +10,7 @@
 - [`SPEC-CORE-31`: Customer Portal — Perfil "Mi Cuenta", Invitaciones & 2FA TOTP](#1-spec-core-31-customer-portal--perfil-mi-cuenta-invitaciones--2fa-totp)
 - [`SPEC-CORE-41`: UI/UX Layout Governance Skill & Mapa Canónico del Layout](#2-spec-core-41-uiux-layout-governance-skill--mapa-canónico-del-layout)
 - [`SPEC-CORE-44`: Ecosistema Multi-Idioma i18n/l10n & Sincronización de Locale Partner Odoo](#3-spec-core-44-ecosistema-multi-idioma-i18nl10n--sincronización-de-locale-partner-odoo)
+- [`SPEC-CORE-45`: Formularios UI de Selección de Idioma, Región y Moneda Localizada](#4-spec-core-45-formularios-ui-de-selección-de-idioma-región-y-moneda-localizada)
 
 ---
 
@@ -40,4 +41,18 @@
 - **Middleware i18n Backend Go (`internal/i18n`)**: Carga asíncrona de paquetes de traducción `.json` / `.po` utilizando `nicksnyder/go-i18n/v2`.
 - **Plantillas Localizadas de Correo y PDF**: Generación dinámica de facturas, avisos de pago, invitaciones y notificaciones de AI Pods ajustadas a la moneda regional (`ARS`, `CLP`, `PEN`, `BRL`, `USD`), formato de fecha y separadores numéricos de cada país.
 - **Soporte Multi-Idioma en React (`i18next`)**: Proveedor `<I18nextProvider>` en Customer Portal y Admin Hub con selector de idioma y región en el perfil de usuario.
+
+---
+
+## 4. SPEC-CORE-45: Formularios UI de Selección de Idioma, Región y Moneda Localizada
+
+- **Componente Selector en Perfil (`SettingsView.jsx`)**:
+  - Selector desplegable de **Idioma Preferido** (`Español Neutro`, `Português`, `English`).
+  - Selector desplegable de **País / Región de Operación** (`🇦🇷 Argentina`, `🇨🇱 Chile`, `🇵🇪 Perú`, `🇺🇾 Uruguay`, `🇲🇽 México`, `🇧🇷 Brasil`, `🇺🇸 United States`).
+  - Selector de **Moneda Principal** (`ARS $`, `CLP $`, `PEN S/`, `UYU $`, `MXN $`, `BRL R$`, `USD $`).
+- **Modal de Invitación Multi-Idioma (`InviteMemberModal.jsx`)**:
+  - Al invitar nuevos miembros con roles RBAC (*Operator, Auditor, Senior Consultant*), el formulario incluye la selección del idioma inicial con el que el nuevo usuario recibirá su correo de bienvenida y accederá al portal.
+- **Persistencia en LocalStorage y Estado Global (`LanguageContext.jsx`)**:
+  - Cambio dinámico instantáneo del idioma de la interfaz sin necesidad de recargar la página.
+
 
