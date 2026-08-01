@@ -51,6 +51,8 @@ graph TD
 | `pod-essential` | `#b60205` | AI Pod esencial para cobro, seguridad o fiscalidad SaaS. |
 | `frontend-customer` | `#0052cc` | Afecta el Portal de Clientes React 18. |
 | `frontend-admin` | `#5319e7` | Afecta el Admin Review Hub React 18. |
+| `i18n` | `#1d76db` | Traducciones, diccionarios .json/.po y soporte multi-idioma. |
+| `l10n` | `#fef2c0` | Formatos regionales de moneda, fechas y separadores por país. |
 
 ---
 
