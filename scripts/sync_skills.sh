@@ -65,4 +65,16 @@ cp -r "$MASTER_SKILLS_DIR/ui-layout-governance" "$ADMIN_DIR/"
 cp -r "$MASTER_SKILLS_DIR/sdd-spec-writer" "$ADMIN_DIR/"
 echo -e "  ${GREEN}✓ Skills Frontend React sincronizadas en aipods-frontend-admin${NC}"
 
-echo -e "${GREEN}🎉 Sincronización & Auditoría de Skills Completada al 100%${NC}"
+# 3. SINCRONIZACIÓN DE REGLAS DE SISTEMA DE AGENTES (.cursorrules, .clauderules, copilot-instructions)
+echo -e "↳ 3. Sincronizando reglas de sistema para Agentes de IA en todos los repositorios..."
+for REPO in "aipods-core-engine" "aipods-frontend-customer" "aipods-frontend-admin"; do
+  cp "$SERVER_DIR/aipods-docs/.cursorrules" "$SERVER_DIR/$REPO/.cursorrules"
+  cp "$SERVER_DIR/aipods-docs/.clauderules" "$SERVER_DIR/$REPO/.clauderules"
+  mkdir -p "$SERVER_DIR/$REPO/.github"
+  cp "$SERVER_DIR/aipods-docs/.github/copilot-instructions.md" "$SERVER_DIR/$REPO/.github/copilot-instructions.md"
+  mkdir -p "$SERVER_DIR/$REPO/.aipods/rules"
+  cp -r "$SERVER_DIR/aipods-docs/.aipods/rules"/* "$SERVER_DIR/$REPO/.aipods/rules/"
+done
+echo -e "  ${GREEN}✓ Reglas de sistema para Agentes de IA sincronizadas en todos los repositorios${NC}"
+
+echo -e "${GREEN}🎉 Sincronización & Auditoría de Skills y Reglas Completada al 100%${NC}"
