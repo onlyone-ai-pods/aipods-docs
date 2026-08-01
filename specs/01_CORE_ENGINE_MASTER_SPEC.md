@@ -43,15 +43,15 @@ Pipeline automatizado con Dockerfile Alpine Multi-Stage (tamaño $< 25\text{MB}$
 
 ### 🧮 Formulación Matemática para Auditoría CMMI Nivel 4 & SOC 2
 
-$$\text{Spec Lead Time (SLT)} = \frac{\sum_{i=1}^{N} (T_{\text{tag\_release}} - T_{\text{spec\_created}})}{N} = 2.18 \text{ horas}$$
+$$\text{Spec Lead Time (SLT)} = \frac{\sum_{i=1}^{N} (T_{\text{release}} - T_{\text{spec}})}{N} = 2.18 \text{ horas}$$
 
 $$\text{Spec Traceability Index (STI)} = \left( \frac{\text{Commits con ID SPEC-CORE-XX}}{\text{Commits Totales}} \right) \times 100 = 100\%$$
 
 $$\text{Defect Density} = \frac{\text{Número de Defectos Falla Producción}}{\text{Total KLOC (Líneas de Código / 1000)}} = 0.00$$
 
-$$\text{Semantic Cache Hit Ratio (SCHR)} = \left( \frac{\text{Cache Hits}}{\text{Cache Hits} + \text{Cache Misses}} \right) \times 100 = 82.4\%$$
+$$\text{Semantic Cache Hit Ratio (SCHR)} = \left( \frac{\text{Cache Hits}}{\text{Cache Hits + Cache Misses}} \right) \times 100 = 82.4\%$$
 
-$$\text{SLA Availability & Latency P95} = \text{Percentil 95 de Latencia HTTP} \le 15.00 \text{ ms}$$
+$$\text{SLA Availability y Latencia P95} = \text{Percentil 95 de Latencia HTTP} \le 15.00 \text{ ms}$$
 
 ### 🌐 Exposición en Exporter Prometheus (`GET /metrics`)
 - `aipods_cmmi_level4_spec_traceability_index`: 1.00 (100%).
