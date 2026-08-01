@@ -1,54 +1,56 @@
-# 📜 SPEC: Rediseño Layout Admin — Responsividad Tablets $\ge$ 8", Sub-Sidebar Colapsable & Badges de Alerta
+# 📜 SPEC: Rediseño Layout Admin — Full-Width Fluid Layout (27" / 4K), Responsividad Tablets $\ge$ 8" & Sub-Sidebar
 **ID:** SPEC-CORE-40  
-**Épica Relacionada:** Admin UX & Ergonomía Visual, Responsividad Tablet ($\ge$ 8"), Sub-Sidebar Navigation & Cascade Alert Badge System  
-**Issue Relacionado:** `#21` ([`[FEAT] Admin Hub: Layout Responsivo Tablets >=8" & Sub-menú Lateral Colapsable`](https://github.com/onlyone-ai-pods/aipods-docs/issues/21))  
+**Épica Relacionada:** Admin UX & Ergonomía Visual, Full-Width Panoramic Support (27" / 4K), Responsividad Tablet ($\ge$ 8") & Sub-Sidebar Navigation  
+**Issue Relacionado:** `#21` ([`[FEAT] Admin Hub: Full-Width Fluid Layout (27" / 4K / UltraWide Support), Sub-Sidebar & Tablet Responsiveness`](https://github.com/onlyone-ai-pods/aipods-docs/issues/21))  
 **Estado:** APPROVED / SPEC-DRIVEN  
 
 ---
 
 ## 1. Visión y Objetivos
 
-Esta especificación define exclusivamente la arquitectura de interfaz responsiva y ergonomía de pantalla para el **Admin Review Hub** (`aipods-frontend-admin`), enfocada en la experiencia de uso para operadores y administradores en jornadas de 6 a 8 horas.
+Esta especificación establece la arquitectura de **Full-Width Fluid Layout (Ancho Fluido Panorámico al 100%)** para el **Admin Review Hub** (`aipods-frontend-admin`), eliminando desperdicios de espacio y márgenes negros en monitores grandes de 27", monitores 4K y pantallas UltraWide.
 
 Establece las reglas de diseño:
-1. **Sub-Menú Lateral Colapsable (`AdminSubSidebar.jsx`)**: Descomposición de pestañas complejas (ej. *Observabilidad*) en sub-módulos laterales.
-2. **Responsividad para Tablets desde 8 Pulgadas ($\ge 768\text{px}$)**: Colapsado automático a modo compacto de solo-iconos con superficies táctiles de toque $\ge 44\text{px}$ (ISO 9241-210 / WCAG 2.1 AAA).
-3. **Propagación de Alertas de Severidad (Cascade Alert Badges)**: Indicadores visuales en el sub-menú lateral para evitar puntos ciegos.
+1. **Full-Width Fluid Layout (100% Ancho Utilitario)**: Sustitución de límites rígidos (`max-width: 1300px`) por contenedores adaptativos fluidos (`width: 100%; padding: 0 32px;`).
+2. **Grids Panorámicos Auto-Adaptativos**: Las tarjetas de telemetría, métricas FinOps y aprobaciones `Dry-Run` se distribuyen dinámicamente en 4 a 6 columnas en monitores de 27".
+3. **Sub-Menú Lateral Colapsable (`AdminSubSidebar.jsx`)**: Descomposición de pestañas complejas en sub-módulos laterales.
+4. **Responsividad para Tablets desde 8 Pulgadas ($\ge 768\text{px}$)**: Colapsado automático a modo compacto de solo-iconos con superficies táctiles de toque $\ge 44\text{px}$ (ISO 9241-210 / WCAG 2.1 AAA).
 
 ---
 
-## 2. Diagrama del Layout Responsivo en Tablets ($\ge 768\text{px}$)
+## 2. Diagrama del Layout Fluido Panorámico (27" / 4K)
 
 ```mermaid
 graph TD
-    Device[Dispositivo de Navegación] --> BreakpointCheck{Ancho de Pantalla}
+    Device[Monitor / Display] --> ResolutionCheck{Resolución & Tamaño}
     
-    BreakpointCheck -->|Desktop >= 1024px| DesktopLayout[Sub-Sidebar Expandida 210px + Icono + Texto + Badges]
-    BreakpointCheck -->|Tablet 8" a 10" (768px - 1023px)| TabletLayout[Sub-Sidebar Compacta 64px (Icon-Only + Tooltip)]
-    BreakpointCheck -->|Mobile < 768px| MobileLayout[Menú Desplegable Horizontal Touch]
+    ResolutionCheck -->|Desktop 27" / 4K / UltraWide (>= 1440px)| FullWidth[Full-Width Fluid Layout 100% + Grid 4 a 6 Columnas]
+    ResolutionCheck -->|Desktop Standard (1024px - 1439px)| StandardFluid[Fluid Layout 100% + Grid 2 a 3 Columnas]
+    ResolutionCheck -->|Tablet 8" a 10" (768px - 1023px)| TabletLayout[Sub-Sidebar Compacta 64px + Targets Táctiles >= 44px]
 
-    TabletLayout --> TouchTarget[🎯 Targets Táctiles >= 44px (ISO 9241 / WCAG 2.1 AAA)]
+    FullWidth --> FullUtilization[🎯 Aprovechamiento del 100% del Ancho de Pantalla (Cero Márgenes Negros)]
 ```
 
 ---
 
-## 3. Descomposición de Pestañas en Sub-Módulos Laterales
+## 3. Matriz de Adaptabilidad por Resolución
 
-| Pestaña Principal | Sub-Módulos en Sidebar Left | Icono | Componente Renderizado |
-|---|---|:---:|---|
-| **`📊 Observabilidad`** | 1. Telemetría OpenTelemetry<br>2. AI Pods Dinámicos<br>3. FinOps & Consumo Tokens | `📊`<br>`🤖`<br>`💰` | `TelemetryDashboard.jsx`<br>`DynamicPodsManager.jsx`<br>`FinOpsMetrics.jsx` |
-| **`🏢 Gestión Multi-Tenant`** | 1. Lista de Tenants & Odoo Billing<br>2. Planes & Cuotas de Tokens | `🏢`<br>`💳` | `TenantManagementView.jsx` |
+| Resolución / Monitor | Ancho Contenedor | Columnas Grid | Estado de Sub-Sidebar |
+|---|---|---|---|
+| **Monitor 27" / 4K / UltraWide** ($\ge 1440\text{px}$) | `width: 100%; padding: 0 32px;` | 4 a 6 Columnas Panorámicas | Expandido (210px) |
+| **Desktop Estándar** ($1024\text{px} - 1439\text{px}$) | `width: 100%; padding: 0 24px;` | 2 a 3 Columnas | Expandido / Colapsable |
+| **Tablet 8" a 10"** ($768\text{px} - 1023\text{px}$) | `width: 100%; padding: 0 16px;` | 1 a 2 Columnas | Compacto Icon-Only (64px) |
 
 ---
 
 ## 4. Escenarios BDD
 
 ```gherkin
-Feature: Layout Responsivo en Tablets de 8 Pulgadas & Sub-Sidebar Colapsable
+Feature: Full-Width Fluid Layout para Monitores Grandes de 27"
 
-  Scenario: Operación desde una Tablet de 8 Pulgadas (768px)
-    Given un administrador navegando en `http://localhost:3001` desde una Tablet (768px)
-    When el viewport detecta un ancho menor o igual a 1024px
-    Then la barra sub-sidebar colapsa automáticamente al modo compacto (64px Icon-Only)
-    And mantiene una superficie de contacto táctil de al menos 44px por botón
+  Scenario: Navegación en Monitor de 27 Pulgadas (2560x1440)
+    Given un administrador operando desde un monitor de 27 pulgadas a resolución 1440p
+    When abre la consola Admin Hub en `http://localhost:3001`
+    Then el layout debe expandirse al 100% del ancho del viewport sin márgenes negros a los lados
+    And las tarjetas de telemetría y métricas deben organizarse dinámicamente en 4 columnas
 ```
