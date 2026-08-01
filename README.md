@@ -4,7 +4,7 @@
 
 # 📜 AI Pods Enterprise SaaS Platform — Documentación & Gobernanza SDD
 
-[![Release Tag](https://img.shields.io/badge/Release-v77.0.0-00f2fe?style=for-the-badge&logo=github)](https://github.com/onlyone-ai-pods/aipods-docs)
+[![Latest GitHub Release Tag](https://img.shields.io/github/v/tag/onlyone-ai-pods/aipods-docs?style=for-the-badge&label=Release&color=00f2fe&logo=github)](https://github.com/onlyone-ai-pods/aipods-docs/releases)
 [![CMMI Level 4](https://img.shields.io/badge/CMMI-Level_4_Certified-10b981?style=for-the-badge&logo=checkmarx)](https://github.com/onlyone-ai-pods/aipods-docs)
 [![ISO 27001 & SOC 2](https://img.shields.io/badge/Security-ISO_27001_%7C_SOC_2-3b82f6?style=for-the-badge&logo=shield)](https://github.com/onlyone-ai-pods/aipods-docs)
 [![Backend Go](https://img.shields.io/badge/Engine-Go_1.22+-00ADD8?style=for-the-badge&logo=go)](https://github.com/onlyone-ai-pods/aipods-core-engine)
