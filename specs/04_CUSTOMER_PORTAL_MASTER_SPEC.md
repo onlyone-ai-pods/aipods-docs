@@ -31,8 +31,13 @@
 
 ## 3. SPEC-CORE-44: Ecosistema Multi-Idioma i18n/l10n & Sincronización de Locale Partner Odoo
 
-- **Detección Dinámica de Locale (`res.partner.lang`)**: Integración con el modelo de Partner de Odoo ERP para sincronizar automáticamente el idioma y preferencia regional del cliente/proveedor (`es_AR`, `pt_BR`, `en_US`).
+- **Cascada de Fallback Inteligente (Fallback Resolution Cascade)**:
+  - Nivel 1 (Región Específica): `es_AR`, `es_CL`, `es_PE`, `es_UY`, `es_MX`, `pt_BR`, `en_US`.
+  - Nivel 2 (Familia Lingüística): `es` (Español Neutro Latinoamericano) o `pt` (Portugués General).
+  - Nivel 3 (Perfil de Usuario / Partner Odoo `res.partner.lang`).
+  - Nivel 4 (Fallback Global por Defecto): `en` (English Default).
+- **Detección Dinámica de Locale (`res.partner.lang`)**: Integración con el modelo de Partner de Odoo ERP para sincronizar automáticamente el idioma y preferencia regional del cliente/proveedor.
 - **Middleware i18n Backend Go (`internal/i18n`)**: Carga asíncrona de paquetes de traducción `.json` / `.po` utilizando `nicksnyder/go-i18n/v2`.
-- **Plantillas Localizadas de Correo y PDF**: Generación dinámica de facturas, avisos de pago, invitaciones y notificaciones de AI Pods ajustadas a la moneda (`ARS`, `BRL`, `USD`), formato de fecha ISO/US y separadores numéricos regionales.
-- **Soporte Multi-Idioma en React (`i18next`)**: Proveedor `<I18nextProvider>` en Customer Portal y Admin Hub con selector de idioma en el perfil de usuario.
+- **Plantillas Localizadas de Correo y PDF**: Generación dinámica de facturas, avisos de pago, invitaciones y notificaciones de AI Pods ajustadas a la moneda regional (`ARS`, `CLP`, `PEN`, `BRL`, `USD`), formato de fecha y separadores numéricos de cada país.
+- **Soporte Multi-Idioma en React (`i18next`)**: Proveedor `<I18nextProvider>` en Customer Portal y Admin Hub con selector de idioma y región en el perfil de usuario.
 
