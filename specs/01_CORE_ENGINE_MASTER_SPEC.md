@@ -12,7 +12,8 @@
 - [`SPEC-CORE-35`: Saga Pattern — Resiliencia Distribuida e Interrupción 2FA](#3-spec-core-35-saga-pattern--resiliencia-distribuida-e-interrupción-2fa)
 - [`SPEC-CORE-36`: DevOps Pipeline — Docker Multi-Stage & Helm Chart](#4-spec-core-36-devops-pipeline--docker-multi-stage--helm-chart)
 - [`SPEC-CORE-42`: CMMI Nivel 4 — Telemetría Cuantitativa en Exporter Prometheus](#5-spec-core-42-cmmi-nivel-4--telemetría-cuantitativa-en-exporter-prometheus)
-- [`SPEC-CORE-47`: Segregación Visual & Distinción de Entornos Admin vs Customer](#6-spec-core-47-segregación-visual--distinción-de-entornos-admin-vs-customer)
+- [`SPEC-CORE-47`: Segregación Visual & Distinción de Entornos Admin vs Customer](#7-spec-core-47-segregación-visual--distinción-de-entornos-admin-vs-customer)
+- [`SPEC-CORE-60`: POD_AWS_INFRASTRUCTURE — AWS SDK v2, Amazon SES & Telemetría](#8-spec-core-60-pod_aws_infrastructure--aws-sdk-v2-amazon-ses--telemetría)
 
 ---
 
@@ -89,4 +90,44 @@ Esta especificación establece el estándar de diferenciación de interfaces y p
 1. **Context Awareness**: El tono cromático distintivo previene que un operador ejecute revocar credenciales o aprobar solicitudes en la plataforma equivocada.
 2. **Insignia Prominente**: El Admin Hub debe lucir la insignia fija `🛡️ SENIOR AUDITOR CONTROL ROOM`.
 3. **Modo Oscuro Continuo**: El Admin Hub opera exclusivamente en Dark Mode de alta densidad para reducir la fatiga visual durante jornadas de monitoreo.
+
+---
+
+## 8. SPEC-CORE-60: POD_AWS_INFRASTRUCTURE — AWS SDK v2, Amazon SES & Telemetría
+
+Esta especificación establece el AI Pod especializado **`POD_AWS_INFRASTRUCTURE`** para el aprovisionamiento, monitoreo, gestión de Amazon SES, Service Quotas, AWS Support API y autoprotección mediante circuitos de corte (Circuit Breaker).
+
+### 8.1 Arquitectura & Flujo de Operación AWS SDK v2
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Admin as Administrador / AI Agent
+    participant Pod as POD_AWS_INFRASTRUCTURE Engine
+    participant SES as Amazon SES v2 (`sesv2`)
+    participant CW as Amazon CloudWatch Metrics (`AWS/SES`)
+    participant SQ as AWS Service Quotas (`servicequotas`)
+    participant SUP as AWS Support API (`support`)
+
+    Admin->>Pod: 1. "Verificar reputación y preparar salida de Sandbox"
+    Pod->>SES: 2. CreateEmailIdentity & GetSendQuota
+    SES-->>Pod: 3. DKIM/SPF Tokens + SendQuota Status
+    Pod->>CW: 4. Query BounceRate & ComplaintRate
+    CW-->>Pod: 5. Metrics Data (BounceRate = 0.42%)
+    alt BounceRate > 4.5%
+        Pod->>SES: 6. Circuit Breaker: PutAccountSendingAttributes(SendingEnabled = false)
+    else Reputación Saludable
+        Pod->>SQ: 7. RequestServiceQuotaIncrease (Daily Volume)
+        Pod->>SUP: 8. CreateCase (Justificación de Salida de Sandbox)
+    end
+    Pod-->>Admin: 9. Diagnóstico Completo + Estado de Solicitud
+```
+
+### 8.2 Componentes Principales
+
+1. **Aprovisionamiento Programático (`sesv2`)**: Creación de Identidades de Email/Dominio (`CreateEmailIdentity`) y habilitación de reputación por Configuration Set.
+2. **Auto-Protection Circuit Breaker**: Monitoreo de CloudWatch Metrics. Si el `BounceRate` alcanza el 4.5%, el Pod desactiva preventivamente los envíos (`SendingEnabled = false`) para evitar la suspensión definitiva de AWS.
+3. **Manejo de Lista de Supresión Automática**: Captura de rebotes duros (`PERMANENT_HARD_BOUNCE`) y quejas SPAM via SNS/SQS, bloqueando solicitudes futuras en 0ms.
+4. **Telemetría de Costos (`costexplorer`)**: Monitoreo de gasto acumulado en \$ USD con la API `GetCostAndUsage`.
+
 
