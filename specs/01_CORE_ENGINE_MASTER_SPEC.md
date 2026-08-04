@@ -14,6 +14,7 @@
 - [`SPEC-CORE-42`: CMMI Nivel 4 — Telemetría Cuantitativa en Exporter Prometheus](#5-spec-core-42-cmmi-nivel-4--telemetría-cuantitativa-en-exporter-prometheus)
 - [`SPEC-CORE-47`: Segregación Visual & Distinción de Entornos Admin vs Customer](#7-spec-core-47-segregación-visual--distinción-de-entornos-admin-vs-customer)
 - [`SPEC-CORE-60`: POD_AWS_INFRASTRUCTURE — AWS SDK v2, Amazon SES & Telemetría](#8-spec-core-60-pod_aws_infrastructure--aws-sdk-v2-amazon-ses--telemetría)
+- [`SPEC-CORE-61`: POD_GOOGLE_WORKSPACE — Google APIs SDK & Workspace Suite](#9-spec-core-61-pod_google_workspace--google-apis-sdk--workspace-suite)
 
 ---
 
@@ -129,5 +130,52 @@ sequenceDiagram
 2. **Auto-Protection Circuit Breaker**: Monitoreo de CloudWatch Metrics. Si el `BounceRate` alcanza el 4.5%, el Pod desactiva preventivamente los envíos (`SendingEnabled = false`) para evitar la suspensión definitiva de AWS.
 3. **Manejo de Lista de Supresión Automática**: Captura de rebotes duros (`PERMANENT_HARD_BOUNCE`) y quejas SPAM via SNS/SQS, bloqueando solicitudes futuras en 0ms.
 4. **Telemetría de Costos (`costexplorer`)**: Monitoreo de gasto acumulado en \$ USD con la API `GetCostAndUsage`.
+
+---
+
+## 9. SPEC-CORE-61: POD_GOOGLE_WORKSPACE — Google APIs SDK & Workspace Suite Integration
+
+Esta especificación establece el AI Pod especializado **`POD_GOOGLE_WORKSPACE`** para la integración con los 9 servicios principales del ecosistema de Google (Drive, Docs, Sheets, Gmail, Calendar, Forms, Chat, Contacts y Tasks) utilizando el SDK oficial `google.golang.org/api`.
+
+### 9.1 Arquitectura & Flujo de Autenticación Híbrida
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as Usuario (@gmail.com / @empresa.com)
+    participant UI as Customer Portal (NativeVaultView.jsx)
+    participant Pod as POD_GOOGLE_WORKSPACE Engine
+    participant Vault as Vault Manager (AES-256 / Bitwarden)
+    participant GAPI as Google APIs (`google.golang.org/api`)
+    participant RAG as Qdrant Vector Store
+
+    alt Cuenta Personal (@gmail.com) / OAuth 2.0 PKCE
+        User->>UI: 1. Hace clic en "Conectar Google"
+        UI->>GAPI: 2. Consent Screen OAuth 2.0 PKCE
+        GAPI-->>UI: 3. Retorna Auth Code & Refresh Token
+        UI->>Vault: 4. Guarda Refresh Token cifrado AES-256-GCM
+    else Cuenta Corporativa (@empresa.com) / Domain-Wide Delegation
+        User->>Vault: 5. Registra Service Account JSON Key (Domain-Wide Delegation)
+    end
+
+    Pod->>Vault: 6. Obtiene credencial activa (Purga RAM 15s)
+    Pod->>GAPI: 7. Consulta Drive / Docs / Gmail / Calendar
+    GAPI-->>Pod: 8. Retorna Documentos / Correos / Eventos
+    Pod->>RAG: 9. Ingesta vectorial para Búsqueda Semántica RAG (Qdrant)
+    Pod-->>User: 10. Respuesta conversacional con enlaces y eventos agendados
+```
+
+### 9.2 Cobertura de Servicios de Google (`google.golang.org/api`)
+
+1. **Google Drive API v3 (`drive/v3`)**: Búsqueda, descarga de archivos PDF/Word y organización de carpetas por Tenant.
+2. **Google Docs API v1 (`docs/v1`)**: Extracción estructurada de texto de contratos, informes y briefs.
+3. **Google Sheets API v4 (`sheets/v4`)**: Inserción, actualización y consulta de filas en hojas de cálculo (CSV/Tablas).
+4. **Gmail API v1 (`gmail/v1`)**: Lectura de correos, generación de borradores y envío de notificaciones.
+5. **Google Calendar API v3 (`calendar/v3`)**: Consulta de disponibilidad (`freebusy.query`) y agendamiento de reuniones con Google Meet.
+6. **Google Forms API v1 (`forms/v1`)**: Creación programática de encuestas y lectura de respuestas vía webhooks.
+7. **Google Chat API v1 (`chat/v1`)**: Envío de notificaciones y comandos en espacios de trabajo corporativos.
+8. **Google People API (`people/v1`)**: Sincronización de contactos comerciales y libreta de direcciones.
+9. **Google Tasks API v1 (`tasks/v1`)**: Generación automática de tareas pendientes derivadas de correos o reuniones.
+
 
 
