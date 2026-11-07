@@ -22,6 +22,6 @@
 
 > *Las especificaciones en desarrollo se crean en `specs/active/`. Una vez cerradas y testeadas (`CLOSED`), se fusionan en su Documento Maestro correspondiente y se retiran de `specs/active/`.*
 
-| ID Spec | Título / Característica | Épica Asignada | Estado Actual |
-|---|---|---|:---:|
-| *(Ninguna spec activa temporal)* | Todos los requerimientos están 100% consolidados en los Documentos Maestros. | N/A | 🟢 `ALL_CONSOLIDATED` |
+| ID Spec | Título / Característica | Épica Asignada | Issue | Estado Actual |
+|---|---|---|:---:|:---:|
+| 📂 [`SPEC-CORE-68`](active/10_rag_dual_strategy_spec.md) | Estrategia RAG Dual Configurable por Tenant (Query Expansion & Embeddings API) | 01 Core Architecture & Engine | [#38](https://github.com/onlyone-ai-pods/aipods-docs/issues/38) | 🟡 `DRAFT (IN_PROGRESS)` |
