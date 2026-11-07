@@ -24,4 +24,4 @@
 
 | ID Spec | Título / Característica | Épica Asignada | Issue | Estado Actual |
 |---|---|---|:---:|:---:|
-| 📂 [`SPEC-CORE-68`](active/10_rag_dual_strategy_spec.md) | Estrategia RAG Dual Configurable por Tenant (Query Expansion & Embeddings API) | 01 Core Architecture & Engine | [#38](https://github.com/onlyone-ai-pods/aipods-docs/issues/38) | 🟡 `DRAFT (IN_PROGRESS)` |
+| 📂 [`SPEC-CORE-70`](active/12_rag_dual_strategy_spec.md) | Estrategia RAG Dual Configurable por Tenant (Query Expansion & Embeddings API) | 01 Core Architecture & Engine | [#38](https://github.com/onlyone-ai-pods/aipods-docs/issues/38) | 🟡 `DRAFT (IN_PROGRESS)` |

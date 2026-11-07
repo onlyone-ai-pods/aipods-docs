@@ -1,4 +1,4 @@
-# SPEC-CORE-68: Estrategia RAG Dual Configurable por Tenant
+# SPEC-CORE-70: Estrategia RAG Dual Configurable por Tenant
 
 **Estado:** DRAFT (IN_PROGRESS)  
 **Épica:** 01 Core Architecture & Engine  
@@ -20,11 +20,11 @@ Actualmente, el motor RAG depende de un contenedor local de Ollama corriendo el 
 
 | ID | Requisito | Verificación |
 |---|---|---|
-| `SPEC-CORE-68.R1` | **Query Expansion con Claude (Alternativa 2 - Default)**: Previo a la búsqueda de documentos, se invoca un prompt rápido a Claude que traduce la consulta informal a términos técnicos, palabras clave y números de resolución de ARCA. | Unit test con mock de LLM verificando la expansión léxica. |
-| `SPEC-CORE-68.R2` | **Embeddings Livianos vía API SaaS (Alternativa 1)**: Implementación de `VoyageEmbedder` (`voyage-3-lite`, 1024 dims) y `OpenAIEmbedder` (`text-embedding-3-small`) implementando la interfaz `embed.Embedder`. | Tests unitarios con clientes HTTP mock. |
-| `SPEC-CORE-68.R3` | **Configuración RAG por Tenant**: La entidad Tenant y el router permiten seleccionar la estrategia: `query_expansion` (por defecto) o `external_embeddings`. | Test de router verificando el despacho según el `tenant_id`. |
-| `SPEC-CORE-68.R4` | **Fallback de Resiliencia**: Si la API externa de embeddings falla, el router degrada automáticamente a Query Expansion + búsqueda léxica sin interrumpir la experiencia de usuario. | Test de simulación de fallo de red en `external_embeddings`. |
-| `SPEC-CORE-68.R5` | **Opcionalidad de Ollama**: El contenedor `ollama` en `docker-compose.oracle.yml` se desactiva por defecto o se aisla en un perfil opcional, liberando RAM en el VPS. | Verificación de arranque sin servicio `ollama`. |
+| `SPEC-CORE-70.R1` | **Query Expansion con Claude (Alternativa 2 - Default)**: Previo a la búsqueda de documentos, se invoca un prompt rápido a Claude que traduce la consulta informal a términos técnicos, palabras clave y números de resolución de ARCA. | Unit test con mock de LLM verificando la expansión léxica. |
+| `SPEC-CORE-70.R2` | **Embeddings Livianos vía API SaaS (Alternativa 1)**: Implementación de `VoyageEmbedder` (`voyage-3-lite`, 1024 dims) y `OpenAIEmbedder` (`text-embedding-3-small`) implementando la interfaz `embed.Embedder`. | Tests unitarios con clientes HTTP mock. |
+| `SPEC-CORE-70.R3` | **Configuración RAG por Tenant**: La entidad Tenant y el router permiten seleccionar la estrategia: `query_expansion` (por defecto) o `external_embeddings`. | Test de router verificando el despacho según el `tenant_id`. |
+| `SPEC-CORE-70.R4` | **Fallback de Resiliencia**: Si la API externa de embeddings falla, el router degrada automáticamente a Query Expansion + búsqueda léxica sin interrumpir la experiencia de usuario. | Test de simulación de fallo de red en `external_embeddings`. |
+| `SPEC-CORE-70.R5` | **Opcionalidad de Ollama**: El contenedor `ollama` en `docker-compose.oracle.yml` se desactiva por defecto o se aisla en un perfil opcional, liberando RAM en el VPS. | Verificación de arranque sin servicio `ollama`. |
 
 ---
 
