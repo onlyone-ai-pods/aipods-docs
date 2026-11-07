@@ -43,6 +43,7 @@ Hoy el único control es el basic auth de Traefik en el VPS.
 | `SPEC-CORE-67.R11` | `POST /api/v1/auth/password` cambia la contraseña del usuario de la sesión. Exige la contraseña actual. Si la actual es incorrecta responde 400, no 401, para no cerrar la sesión. Exige una contraseña nueva distinta de 12 caracteres o más. Los dos portales tienen pantalla para usarlo. | Tests de handler + navegador. |
 | `SPEC-CORE-67.R12` | `GET /api/v1/admin/users` lista usuarios sin el hash. `platform_admin` y `auditor` ven todos los tenants (opcional `?tenant_id=`); `tenant_admin` solo el suyo (otro tenant → 403); `customer` → 403. El portal admin tiene la pestaña Usuarios, que lista y da de alta. | Tests de handler. |
 | `SPEC-CORE-67.R13` | `PATCH /api/v1/admin/users/:id` (`{"active": bool}`) y `POST /api/v1/admin/users/:id/password` los usan `platform_admin` (todos) o `tenant_admin` (solo su tenant, sin tocar cuentas `platform_admin` o `auditor`). Un usuario de otro tenant se ve como 404. Nadie se desactiva ni se resetea a sí mismo. Un usuario desactivado no puede entrar y su token deja de valer en la siguiente llamada, porque el middleware consulta `active`. Todo queda en `audit_log`. | Tests de handler + middleware. |
+| `SPEC-CORE-67.R14` | `GET /api/v1/approvals/:token` es público y devuelve solo `{token, status, execution_result, decided_at}` (sin comando, tenant ni resumen), con `Cache-Control: no-store`. El token funciona como capacidad: `dryrun_` + UUID v4 (122 bits aleatorios); los tokens viejos de 8 caracteres responden 404. El portal de clientes consulta así el estado de sus acciones pendientes y muestra aprobado o rechazado, sin llamar a `/admin/approvals`. | Tests de handler + navegador. |
 
 ## 4. Fases
 
@@ -50,6 +51,7 @@ Hoy el único control es el basic auth de Traefik en el VPS.
 2. **Frontends:** login en customer y admin (R10).
 3. **Deploy:** `AUTH_SIGNING_KEY` y usuario inicial en el VPS, `AUTH_MODE=enforce`; después, decidir si se quita el basic auth. Hecho el 2026-11-06: `/api` quedó sin basic auth (el header `Authorization` no puede llevar a la vez Basic y Bearer); los portales y `/metrics` lo mantienen.
 4. **Gestión de usuarios (R11–R13):** cambio de contraseña propia, listado, activar/desactivar y reseteo de contraseña desde los portales.
+5. **Estado de aprobaciones para el cliente (R14):** el cliente ve si su acción fue aprobada o rechazada. En el mismo PR del core: Gin en modo release cuando `ENVIRONMENT=production` (salvo que `GIN_MODE` diga otra cosa), `gin.New()` con Logger y Recovery, y proxies de confianza limitados a loopback y redes privadas (configurable con `TRUSTED_PROXIES`), para que `X-Forwarded-For` no se pueda falsificar desde afuera.
 
 ## 5. Fuera de alcance
 
