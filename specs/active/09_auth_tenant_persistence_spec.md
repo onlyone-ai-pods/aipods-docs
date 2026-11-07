@@ -44,6 +44,7 @@ Hoy el único control es el basic auth de Traefik en el VPS.
 | `SPEC-CORE-67.R12` | `GET /api/v1/admin/users` lista usuarios sin el hash. `platform_admin` y `auditor` ven todos los tenants (opcional `?tenant_id=`); `tenant_admin` solo el suyo (otro tenant → 403); `customer` → 403. El portal admin tiene la pestaña Usuarios, que lista y da de alta. | Tests de handler. |
 | `SPEC-CORE-67.R13` | `PATCH /api/v1/admin/users/:id` (`{"active": bool}`) y `POST /api/v1/admin/users/:id/password` los usan `platform_admin` (todos) o `tenant_admin` (solo su tenant, sin tocar cuentas `platform_admin` o `auditor`). Un usuario de otro tenant se ve como 404. Nadie se desactiva ni se resetea a sí mismo. Un usuario desactivado no puede entrar y su token deja de valer en la siguiente llamada, porque el middleware consulta `active`. Todo queda en `audit_log`. | Tests de handler + middleware. |
 | `SPEC-CORE-67.R14` | `GET /api/v1/approvals/:token` es público y devuelve solo `{token, status, execution_result, decided_at}` (sin comando, tenant ni resumen), con `Cache-Control: no-store`. El token funciona como capacidad: `dryrun_` + UUID v4 (122 bits aleatorios); los tokens viejos de 8 caracteres responden 404. El portal de clientes consulta así el estado de sus acciones pendientes y muestra aprobado o rechazado, sin llamar a `/admin/approvals`. | Tests de handler + navegador. |
+| `SPEC-CORE-67.R15` | Cambiar la propia contraseña (R11) o que un admin la resetee (R13) cierra todas las sesiones abiertas de ese usuario. `users.token_version` sube en cada cambio, el JWT lleva `tv` y el middleware rechaza con 401 un token cuyo `tv` no coincide. En el cambio propio, `POST /auth/password` devuelve un token nuevo para que esa sesión siga abierta. Los tokens anteriores a esta versión llevan `tv` 0, igual que los usuarios que nunca cambiaron la contraseña. | Tests de handler, middleware y store (memoria y Postgres). |
 
 ## 4. Fases
 
@@ -56,6 +57,5 @@ Hoy el único control es el basic auth de Traefik en el VPS.
 ## 5. Fuera de alcance
 
 - SSO/OAuth2 externo (Google, Azure AD) y MFA.
-- Revocar los otros tokens abiertos al cambiar la contraseña: siguen valiendo hasta su vencimiento (8 h). Desactivar al usuario sí los corta.
 - La vista "Equipo & Roles" del portal de clientes sigue con datos de ejemplo; conectarla a R12–R13 para `tenant_admin` queda para otra iteración.
 - Mover a Postgres los pods dinámicos y las sesiones del sandbox.
