@@ -40,14 +40,20 @@ Hoy el único control es el basic auth de Traefik en el VPS.
 | `SPEC-CORE-67.R8` | Aprobaciones, secretos del vault y auditoría sobreviven a un reinicio del core. El vault no guarda copias en claro ni carga secretos de ejemplo. | Test de integración: crear → nueva instancia → leer. |
 | `SPEC-CORE-67.R9` | Login, aprobación/rechazo y revelado de secretos quedan en `audit_log` con usuario, tenant, IP y hora. | Test. |
 | `SPEC-CORE-67.R10` | Los frontends tienen pantalla de login, guardan el token en memoria (no localStorage) y lo envían en cada llamada a `/api/v1`. | PR de frontends. |
+| `SPEC-CORE-67.R11` | `POST /api/v1/auth/password` cambia la contraseña del usuario de la sesión. Exige la contraseña actual. Si la actual es incorrecta responde 400, no 401, para no cerrar la sesión. Exige una contraseña nueva distinta de 12 caracteres o más. Los dos portales tienen pantalla para usarlo. | Tests de handler + navegador. |
+| `SPEC-CORE-67.R12` | `GET /api/v1/admin/users` lista usuarios sin el hash. `platform_admin` y `auditor` ven todos los tenants (opcional `?tenant_id=`); `tenant_admin` solo el suyo (otro tenant → 403); `customer` → 403. El portal admin tiene la pestaña Usuarios, que lista y da de alta. | Tests de handler. |
+| `SPEC-CORE-67.R13` | `PATCH /api/v1/admin/users/:id` (`{"active": bool}`) y `POST /api/v1/admin/users/:id/password` los usan `platform_admin` (todos) o `tenant_admin` (solo su tenant, sin tocar cuentas `platform_admin` o `auditor`). Un usuario de otro tenant se ve como 404. Nadie se desactiva ni se resetea a sí mismo. Un usuario desactivado no puede entrar y su token deja de valer en la siguiente llamada, porque el middleware consulta `active`. Todo queda en `audit_log`. | Tests de handler + middleware. |
 
 ## 4. Fases
 
 1. **Core (este PR):** migraciones, stores en Postgres con alternativa en memoria, login, middleware y roles detrás de `AUTH_MODE`.
 2. **Frontends:** login en customer y admin (R10).
-3. **Deploy:** `AUTH_SIGNING_KEY` y usuario inicial en el VPS, `AUTH_MODE=enforce`; después, decidir si se quita el basic auth.
+3. **Deploy:** `AUTH_SIGNING_KEY` y usuario inicial en el VPS, `AUTH_MODE=enforce`; después, decidir si se quita el basic auth. Hecho el 2026-11-06: `/api` quedó sin basic auth (el header `Authorization` no puede llevar a la vez Basic y Bearer); los portales y `/metrics` lo mantienen.
+4. **Gestión de usuarios (R11–R13):** cambio de contraseña propia, listado, activar/desactivar y reseteo de contraseña desde los portales.
 
 ## 5. Fuera de alcance
 
 - SSO/OAuth2 externo (Google, Azure AD) y MFA.
+- Revocar los otros tokens abiertos al cambiar la contraseña: siguen valiendo hasta su vencimiento (8 h). Desactivar al usuario sí los corta.
+- La vista "Equipo & Roles" del portal de clientes sigue con datos de ejemplo; conectarla a R12–R13 para `tenant_admin` queda para otra iteración.
 - Mover a Postgres los pods dinámicos y las sesiones del sandbox.
