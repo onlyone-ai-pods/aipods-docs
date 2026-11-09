@@ -25,3 +25,4 @@
 | ID Spec | Título / Característica | Épica Asignada | Issue | Estado Actual |
 |---|---|---|:---:|:---:|
 | 📂 [`SPEC-CORE-70`](active/12_rag_dual_strategy_spec.md) | Estrategia RAG Dual Configurable por Tenant (Query Expansion & Embeddings API) | 01 Core Architecture & Engine | [#38](https://github.com/onlyone-ai-pods/aipods-docs/issues/38) | 🟡 `DRAFT (IN_PROGRESS)` |
+| 📂 [`SPEC-CORE-71`](active/11_semantic_cache_shared_reuse_spec.md) | Conexión de Caché Semántico al Router con Reutilización Global | 01 Core Architecture & Engine / 02 Security & Compliance | [#39](https://github.com/onlyone-ai-pods/aipods-docs/issues/39) | 🟡 `DRAFT (IN_PROGRESS)` |
