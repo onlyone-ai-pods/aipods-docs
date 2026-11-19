@@ -27,19 +27,21 @@ El sistema está estructurado modularmente en 4 repositorios independientes en l
 ```text
 github.com/onlyone-ai-pods/
 ├── aipods-docs/              [DOCS] 24 Especificaciones SDD, Backlog, SDD.md, OpenAPI, Spec Writer Skill
-├── aipods-core-engine/       [BACKEND] Go 1.22+ Server, Smart Router, Multi-Tenant Context, DBs, Docker, Evals
+├── aipods-core-engine/       [BACKEND] Go 1.26 Server, Smart Router, Multi-Tenant Context, DBs, Docker, Evals
 ├── aipods-frontend-customer/ [FRONTEND] React 18 / Vite Portal Público & Sandbox ("Servicio como Software")
 └── aipods-frontend-admin/    [ADMIN] React 18 / Vite Portal Interno, Senior Review Hub, mTLS & FinOps
 ```
 
 ---
 
-## 3. Arquitectura Tecnológica de Alto Nivel
+## 3. Arquitectura Tecnológica de Alto Nivel (Objetivo)
+
+> **Nota (2026-11-19):** este diagrama describe la arquitectura objetivo. La arquitectura que corre hoy (un VPS con Traefik, un contenedor del core, Postgres y Redis de un nodo) y las etapas para llegar a la objetivo están en [`ARCHITECTURE_SCALING_ROADMAP.md`](ARCHITECTURE_SCALING_ROADMAP.md).
 
 ```mermaid
 graph TD
     User[Cliente en Web / WhatsApp / ERP] -->|HTTPS / WSS| WAF[AWS CloudFront / WAF]
-    WAF --> Gateway[API Gateway en Go 1.22+]
+    WAF --> Gateway[API Gateway en Go 1.26]
     
     subgraph "Engine Core Backend (Golang)"
         Gateway --> Auth[AuthN / AuthZ - OAuth2 RS256]
@@ -106,6 +108,6 @@ La plataforma opera su propio negocio SaaS consumiendo sus propios AI Pods vía 
 
 1. **Aislamiento Multi-Tenant Absoluto:** Cláusula invariante `WHERE (tenant_id == CurrentTenantID OR tenant_id == 'GLOBAL') AND status == 'ACTIVE'`.
 2. **Protocolo Obligatorio Dry-Run (`dry_run = true`):** Simulación de acciones con efectos secundarios y token de aprobación humana (*Human-in-the-Loop*).
-3. **Resiliencia & DRP:** RPO $< 1$ minuto, RTO $< 15$ minutos con Redis Active-Active CRDTs y colas NATS JetStream.
+3. **Resiliencia & DRP (objetivo):** RPO $< 1$ minuto, RTO $< 15$ minutos, con réplica de PostgreSQL en otra región y colas NATS JetStream. Hoy no se cumple: es el criterio de salida de la Etapa 3 de [`ARCHITECTURE_SCALING_ROADMAP.md`](ARCHITECTURE_SCALING_ROADMAP.md). El despliegue sin cortes está en SPEC-CORE-73.
 4. **Cumplimiento Normativo:** Marcos ISO 9001 (Calidad), SOC 2 Type II (Seguridad/Privacidad) e ISO 27001.
 5. **Gobernanza Git & BDD:** Convención de ramas `<tipo>/<id>-<descripcion>`, Spec PR Gate en `aipods-docs` antes de Code PRs en `aipods-core-engine`, y pruebas automatizadas BDD ejecutadas con `godog` en Go.
