@@ -9,7 +9,7 @@
 
 | Épica / Dominio | Documento Maestro Consolidado | Specs ID Incluidas | Estado |
 |---|---|---|:---:|
-| **01. Core Architecture & Engine** | 📂 [`01_CORE_ENGINE_MASTER_SPEC.md`](01_CORE_ENGINE_MASTER_SPEC.md) | `SPEC-CORE-01` a `15`, `33`, `35`, `36`, `42`, `46`, `47` | ✅ `CONSOLIDATED` |
+| **01. Core Architecture & Engine** | 📂 [`01_CORE_ENGINE_MASTER_SPEC.md`](01_CORE_ENGINE_MASTER_SPEC.md) | `SPEC-CORE-01` a `15`, `33`, `35`, `36`, `42`, `46`, `47`, `60`, `61`, `71`, `72` | ✅ `CONSOLIDATED` |
 | **02. Security & Compliance (SGSI)** | 📂 [`02_SECURITY_AND_COMPLIANCE_MASTER_SPEC.md`](02_SECURITY_AND_COMPLIANCE_MASTER_SPEC.md) | `SPEC-CORE-16` a `27`, `32`, `34`, `38`, `59` | ✅ `CONSOLIDATED` |
 | **03. Admin Hub & Governance** | 📂 [`03_ADMIN_HUB_GOVERNANCE_MASTER_SPEC.md`](03_ADMIN_HUB_GOVERNANCE_MASTER_SPEC.md) | `SPEC-CORE-28` a `30`, `37`, `38`, `39`, `40` | ✅ `CONSOLIDATED` |
 | **04. Customer Portal & Design System** | 📂 [`04_CUSTOMER_PORTAL_MASTER_SPEC.md`](04_CUSTOMER_PORTAL_MASTER_SPEC.md) | `SPEC-CORE-31`, `41`, `44`, `45` | ✅ `CONSOLIDATED` |
@@ -25,4 +25,3 @@
 | ID Spec | Título / Característica | Épica Asignada | Issue | Estado Actual |
 |---|---|---|:---:|:---:|
 | 📂 [`SPEC-CORE-70`](active/12_rag_dual_strategy_spec.md) | Estrategia RAG Dual Configurable por Tenant (Query Expansion & Embeddings API) | 01 Core Architecture & Engine | [#38](https://github.com/onlyone-ai-pods/aipods-docs/issues/38) | 🟡 `DRAFT (IN_PROGRESS)` |
-| 📂 [`SPEC-CORE-71`](active/11_semantic_cache_shared_reuse_spec.md) | Conexión de Caché Semántico al Router con Reutilización Global | 01 Core Architecture & Engine / 02 Security & Compliance | [#39](https://github.com/onlyone-ai-pods/aipods-docs/issues/39) | 🟡 `DRAFT (IN_PROGRESS)` |
