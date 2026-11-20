@@ -1,6 +1,6 @@
 # 🚀 Proyecto Antigravity: AI Pods Enterprise SaaS Platform
 
-Plataforma SaaS basada en arquitectura RAG (Retrieval-Augmented Generation) diseñada para "clonar" e institucionalizar el conocimiento experto de consultores y especialistas empresariales en AFIP/ARCA, EvoCRM, Odoo, SAP, Salesforce y Cadena de Suministros. El sistema se compone de múltiples "AI Pods" (Agentes especializados agnósticos conectables a cualquier API/ERP) orquestados por un Router inteligente, escalable para soportar +200 empresas bajo un modelo multi-tenant seguro.
+Plataforma SaaS basada en arquitectura RAG (Retrieval-Augmented Generation) diseñada para "clonar" e institucionalizar el conocimiento experto de consultores y especialistas empresariales en AFIP/ARCA, EvoCRM, Odoo, SAP, Salesforce y Cadena de Suministros. El sistema se compone de múltiples "AI Pods" (Agentes especializados agnósticos conectables a cualquier API/ERP) orquestados por un Router inteligente, diseñado para crecer por etapas bajo un modelo multi-tenant seguro (capacidad y criterios de salida en [`ARCHITECTURE_SCALING_ROADMAP.md`](ARCHITECTURE_SCALING_ROADMAP.md)).
 
 ---
 
@@ -51,3 +51,6 @@ Plataforma SaaS basada en arquitectura RAG (Retrieval-Augmented Generation) dise
   > **Como** administrador de infraestructura SAP,  
   > **quiero** invocar BAPIs nativas mediante PyRFC con simulación Dry-Run,  
   > **para** integrar procesos legacy de SAP R/3 o ECC con la plataforma AI Pods.
+
+### 👑 ÉPICA 13: Escalabilidad, Alta Disponibilidad y Despliegue sin Cortes
+*Despliegue blue-green (SPEC-CORE-73), backups y alta disponibilidad de PostgreSQL, gateway del LLM con cuotas por tenant, streaming de respuestas, observabilidad con OpenTelemetry y escalado multi-nodo. Etapas y criterios de salida en [`ARCHITECTURE_SCALING_ROADMAP.md`](ARCHITECTURE_SCALING_ROADMAP.md).*
